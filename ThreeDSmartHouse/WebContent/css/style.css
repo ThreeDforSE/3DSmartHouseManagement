@@ -30,9 +30,12 @@ img{max-width:100%;}
 /****-----start-body----****/
 body{
 	background:#B0C4DE;
- 	font-family: 'Open Sans', sans-serif;
+ 	font-family: 'Open Sans', sans-serif,\5fae\8f6f\96c5\9ed1;
 
 }
+input， label，p, select， option， textarea， button， fieldset， legend { 
+font-family: 'Microsoft YaHei';
+font-size: 12px; }
 .login-form {
 	background:#eee;
 	width: 26%;
@@ -271,7 +274,7 @@ text-align: center;
 form p a:hover {
 	color:#4169E1;
 }
- input[type="text"], input[type="password"]{
+ input[type="textC"], input[type="passwordC"]{
 	text-align:left;
 	position: relative;
 	width:92%;
