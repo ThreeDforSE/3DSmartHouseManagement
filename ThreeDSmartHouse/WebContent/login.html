@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ApNut智能家居管理系统 用户登录</title>
+	<title>登录-ApNut智能家居管理系统 v1.0</title>
 		<meta charset="utf-8">
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -9,38 +9,84 @@
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="application/x-javascript"> 
-		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<style>
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+		
+		function doLogin(){
+			$("#loginFrm").form({
+				url:'LoginServlet',
+				success:function(data){
+					if(data=='1'){
+						window.location.href='index.html';
+					}
+					else{
+						$.messager.alert('提示','用户名或密码错误！');
+					}
+				}
+			});
+			$("#loginFrm").submit();
+		}
+		//文档加载之后执行
+		$(function(){
+			$("#loginDialog").dialog({
+				//设置dialog的属性
+				title:'有家超市经营助手',
+				buttons:[
+					{text:'登录',handler:function(){
+						//执行表单提交
+						doLogin();
+						}},
+					{text:'注册'}
+				]
+				
+				});
+		});
+		</script>
 
+		<style>
 			body{
 				margin: 0;
 				overflow: hidden;
 			}
 		</style>
 </head>
+
 <body>
 	 <!-----start-main---->
 	 <div class="main">
 		<div class="login-form">
-			<h1>ApNut智能家居管理系统</h1>
-			<h3>用户登录</h3>
+			<h1 class="fontC">ApNut智能家居管理系统</h1>
+			<h3 class="fontC">用户登录</h3>
 					<div class="head">
 						<img src="images/lg.png" alt=""/>
 					</div>
-				<form>
-						<input type="textC" id="uid" class="text" value="请输入用户名" onpropertychange='check(this.value)' oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}" >
-						<input type="passwordC" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-						<div class="submit">
-							<input type="submit" onclick="myFunction()" value="登录" >
-					</div>	
-					<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal">忘记密码？</a></p>
+			<form id="loginFrm" method="post">
+				<input type="textC" id="uid" name="uname" class="text fontC" value="请输入注册手机号" onpropertychange='check(this.value)' oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入注册手机号';this.color=#E8E8E8;}" >
+				<input type="passwordC" class="fontC" name="password" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
+				<div class="submit">
+					<input type="submit" class="fontC" onclick="myFunction()" value="登录" >
+				</div>	
+				<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal" class="fontC">忘记密码？</a></p>
+			</form>
+		</div>
+			<!--//End-login-form-->
+					<!-- Button trigger modal -->
 
+			 <!-----start-copyright---->
+   					<div class="copy-right">
+						<p>Copyright &copy; 2016.ApNut Tech. All rights reserved.</p> 
+					</div>
+				<!-----//end-copyright---->
+		</div>
+			 <!-----//end-main---->
+
+
+			 <!-----//忘记密码弹框---->
 	<div class="modal fade bs-example-modal-sm" id="RetrieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-headerC fontC">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="exampleModalLabel">忘记密码</h4>
+	        <h4 class="modal-title fontC" id="exampleModalLabel">忘记密码</h4>
 	      </div>
 	      <div class="modal-body">
 
@@ -52,31 +98,31 @@
 			                        <label class="col-md-3 control-label fontC">手机号</label>
 
 			                        <div class="col-md-8">
-			                            <input type="text" class="form-control input-lg fontC" name="full_name" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
+			                            <input type="text" class="form-control input-lg fontC" name="uname" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
 			                        </div>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label">验证码</label>
-			                        <div class="col-md-5">
-			                            <input type="password" class="form-control input-lg" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+			                        <label class="col-md-3 control-label fontC">验证码</label>
+			                        <div class="col-md-4">
+			                            <input type="text" class="form-control input-lg fontC" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
 			                        </div>
-			                        <button type="button" class="btn btn-danger btn-lgC col-md-3">发送验证码</button>
+			                        <button type="button" class="btn btn-danger btn-lg col-md-3 fontC">发送验证码</button>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label">新密码</label>
+			                        <label class="col-md-3 control-label fontC">新密码</label>
 			                        <div class="col-md-8">
-			                            <input type="password" class="form-control input-lg" name="new_password" value="请填写新密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写新密码';}"/>
-			                            <span class="help-block">请输入您的新密码。</span>
+			                            <input type="password" class="form-control input-lg fontC" name="new_password" value="请填写新密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写新密码';}"/>
+			                            <span class="help-block fontC">请输入您的新密码。</span>
 			                        </div>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label">确认密码</label>
+			                        <label class="col-md-3 control-label fontC">确认密码</label>
 			                        <div class="col-md-8">
-			                            <input type="password" class="form-control input-lg" name="confirm_password" value="请确认密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请确认密码';}"/>
-			                            <span class="help-block">请再次输入您的新密码。</span>
+			                            <input type="password" class="form-control input-lg fontC" name="confirm_password" value="请确认密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请确认密码';}"/>
+			                            <span class="help-block fontC">请再次输入您的新密码。</span>
 			                        </div>
 			                    </div>
 			                </form>
@@ -86,12 +132,14 @@
 	      </div>
 
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-danger">提交</button>
+	        <button type="button" class="btn btn-default fontC" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-danger fontC">提交</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
+
+	<!-----//end of 忘记密码弹出框---->
 
 <script type="text/javascript">
 	$('#exampleModal').on('shown.bs.modal', function () {
@@ -168,18 +216,7 @@
 //})
 </script>
 
-				</form>
-			</div>
-			<!--//End-login-form-->
-					<!-- Button trigger modal -->
 
-			 <!-----start-copyright---->
-   					<div class="copy-right">
-						<p>Copyright &copy; 2016.ApNut Tech. All rights reserved.</p> 
-					</div>
-				<!-----//end-copyright---->
-		</div>
-			 <!-----//end-main---->
 		
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>

@@ -46,12 +46,44 @@ body{
 font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
 }
 
+.navbar-textC {
+	float: left;
+  color: #9d9d9d;
+  font-size: 18px;
+   margin-top: 13px;
+  margin-bottom: 12px;
+  color: #777;
+}
+
 .btn-lgC{
   padding: 20px 5px 20px ;
   margin:10px 0 10px ;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.3333333;
   border-radius: 6px;
+}
+
+@media (min-width: 768px) {
+  .navbar-leftC {
+    float: left !important;
+  }
+  .navbar-rightC {
+    float: right !important;
+    margin-right: 10px;
+  }
+  .navbar-rightC ~ .navbar-rightC {
+    margin-right: 10px;
+  }
+}
+
+.centerC {
+  width: 100px;
+  display: inline-table;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text-centerC {
+  text-align: center;
 }
 
 input， label，p, select， option， textarea， button， fieldset， legend { 
