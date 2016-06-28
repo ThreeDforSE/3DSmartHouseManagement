@@ -33,6 +33,27 @@ body{
  	font-family: 'Open Sans', sans-serif,\5fae\8f6f\96c5\9ed1;
 
 }
+
+.modal-headerC {
+  background-color:#DC143C;
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  color:#FFFAF0;
+}
+
+.fontC{
+font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
+}
+
+.btn-lgC{
+  padding: 20px 5px 20px ;
+  margin:10px 0 10px ;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
 input， label，p, select， option， textarea， button， fieldset， legend { 
 font-family: 'Microsoft YaHei';
 font-size: 12px; }

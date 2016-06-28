@@ -7,7 +7,7 @@
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="application/x-javascript"> 
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<style>
@@ -38,59 +38,56 @@
 	<div class="modal fade bs-example-modal-sm" id="RetrieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-headerC fontC">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="exampleModalLabel">忘记密码</h4>
 	      </div>
 	      <div class="modal-body">
 
-<div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+			<div class="container-fluid">
+			        <div class="row">
+			            <div class="col-md-10 col-md-offset-1">
+			                <form id="signupForm" method="post" class="form-horizontal" action="target.php">
+			                    <div class="form-group">
+			                        <label class="col-md-3 control-label fontC">手机号</label>
 
-                <form id="signupForm" method="post" class="form-horizontal" action="target.php">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">手机号</label>
-<label class="control-label sr-only" for="inputGroupSuccess4">Input group with success</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control input-lg" name="full_name" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}"/>
-                        </div>
-                    </div>
+			                        <div class="col-md-8">
+			                            <input type="text" class="form-control input-lg fontC" name="full_name" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
+			                        </div>
+			                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">验证码</label>
-                        <div class="col-md-5">
-                            <input type="password" class="form-control input-lg" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
-                        </div>
-                        <button type="button" class="btn btn-primary col-md-4">发送验证码</button>
-                    </div>
+			                    <div class="form-group">
+			                        <label class="col-md-3 control-label">验证码</label>
+			                        <div class="col-md-5">
+			                            <input type="password" class="form-control input-lg" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+			                        </div>
+			                        <button type="button" class="btn btn-danger btn-lgC col-md-3">发送验证码</button>
+			                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">新密码</label>
-                        <div class="col-md-8">
-                            <input type="password" class="form-control input-lg" name="new_password" value="请填写新密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写新密码';}"/>
-                            <span class="help-block">请输入您的新密码。</span>
-                        </div>
-                    </div>
+			                    <div class="form-group">
+			                        <label class="col-md-3 control-label">新密码</label>
+			                        <div class="col-md-8">
+			                            <input type="password" class="form-control input-lg" name="new_password" value="请填写新密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写新密码';}"/>
+			                            <span class="help-block">请输入您的新密码。</span>
+			                        </div>
+			                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">确认密码</label>
-                        <div class="col-md-8">
-                            <input type="password" class="form-control input-lg" name="confirm_password" value="请确认密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请确认密码';}"/>
-                            <span class="help-block">请再次输入您的新密码。</span>
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-        </div>
-    </div>
+			                    <div class="form-group">
+			                        <label class="col-md-3 control-label">确认密码</label>
+			                        <div class="col-md-8">
+			                            <input type="password" class="form-control input-lg" name="confirm_password" value="请确认密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请确认密码';}"/>
+			                            <span class="help-block">请再次输入您的新密码。</span>
+			                        </div>
+			                    </div>
+			                </form>
+			            </div>
+			        </div>
+			 </div>
 	      </div>
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-primary">提交</button>
+	        <button type="button" class="btn btn-danger">提交</button>
 	      </div>
 	    </div>
 	  </div>
