@@ -28,14 +28,24 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 /****-----start-body----****/
-body{
+body,html{
 	background:#B0C4DE;
  	font-family: 'Open Sans', sans-serif,\5fae\8f6f\96c5\9ed1;
-
+ 	height: 100%;
+ 	margin:0px;
+	height:100%;
 }
 
 .modal-headerC {
   background-color:#DC143C;
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  color:#FFFAF0;
+}
+
+.modal-headerB {
+  background-color:#4F94CD;
   min-height: 16.42857143px;
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
@@ -47,7 +57,7 @@ font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
 }
 
 .navbar-textC {
-	float: left;
+  float: left;
   color: #9d9d9d;
   font-size: 18px;
    margin-top: 13px;
@@ -76,6 +86,12 @@ font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
   }
 }
 
+.div-relative{
+	position:relative;   
+	width:100%; 
+	height:100%;
+} 
+
 .centerC {
   width: 100px;
   display: inline-table;
@@ -86,7 +102,100 @@ font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
   text-align: center;
 }
 
-inputï¼Œ labelï¼Œp, selectï¼Œ optionï¼Œ textareaï¼Œ buttonï¼Œ fieldsetï¼Œ legend { 
+
+.modalC {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: 100px;
+  height: 400px;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.modalB {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 400px;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+   opacity:0.4;
+}
+
+.fadeC {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+       -o-transition: opacity .15s linear;
+          transition: opacity .15s linear;
+
+      -webkit-transition: -webkit-transform .3s ease-out;
+       -o-transition:      -o-transform .3s ease-out;
+          transition:         transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+       -o-transform: translate(0, -25%);
+          transform: translate(0, -25%);
+}
+
+.btnLeft {
+	width: 30px;
+	height: 55px;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 100;
+}
+
+.btnLine {
+  display: inline;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+input£¬ label£¬p, select£¬ option£¬ textarea£¬ button£¬ fieldset£¬ legend { 
 font-family: 'Microsoft YaHei';
 font-size: 12px; }
 .login-form {
