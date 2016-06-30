@@ -1,0 +1,47 @@
+<!DOCTYPE html>  
+<html>   
+<head>   
+<title></title>   
+<style type="text/css">  
+    div {  
+        height: 500px;  
+        width: 400px;  
+    }  
+    #div1 {  
+        background-color: #ff0;  
+    }  
+    #div2 {  
+        background-color: #f0f;  
+    }  
+    #div3 {  
+        background-color: #0ff;  
+    }  
+    #div4 {  
+        background-color: #f00;  
+    }  
+</style>  
+</head>   
+<body>  
+    <h1 id="anchor">head</h1>  
+    <div id="div1">a</div>  
+    <div id="div2">b</div>  
+    <div id="div3">c</div>  
+    <div id="div4">d</div>  
+    <a class="topLink" href="#anchor">TOP</a>  
+</body>   
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>  
+<script type="text/javascript">   
+/* chrome ie8下均正常 */  
+$(document).ready(function() {  
+    $("a.topLink").click(function() {  
+        $("html, body").animate({  
+            scrollTop: $($(this).attr("href")).offset().top + "px"  
+        }, {  
+            duration: 1000,  
+            easing: "swing"  
+        });  
+        return false;  
+    });  
+});  
+</script>   
+</html>  

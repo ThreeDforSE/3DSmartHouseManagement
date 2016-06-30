@@ -3,6 +3,15 @@ package com.apnut.entity;
 public abstract class MyProduct extends Product {
 	private int uid;
 	private int pid;
+	private String coordinate;
+	public String getCoordinate() {
+		return coordinate;
+	}
+
+	public void setCoordinate(double x,double y){
+		coordinate="";
+		coordinate+=x+","+y;
+	}
 	
 	public int getUid() {
 		return uid;

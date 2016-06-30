@@ -71,6 +71,17 @@ public class UserDao extends BaseDao {
 		return super.executeUpdate(sql, parm);
 	}
 	
+	public int updatePwd(int uid, String newPwd){
+		String sql = " update tb_user_list " +
+			     	 "    set pwd        = ?"+
+			     	"  where uid         = ? ";
+		Object[] parm = new Object[2];
+		parm[0] = newPwd;
+		parm[1] = uid;
+
+		return super.executeUpdate(sql, parm);
+	}
+	
 	public Client queryUser(String uname)
 	{
 		Client client = null;

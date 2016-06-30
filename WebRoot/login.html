@@ -5,41 +5,48 @@
 		<meta charset="utf-8">
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href="css/bootstrapValidator.css" rel="stylesheet" type='text/css'/>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
 		<script type="application/x-javascript"> 
+
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 		
 		function doLogin(){
+			// $("#loginFrm").form({
+			// 	url:'LoginServlet',
+			// 	success:function(data){
+			// 		if(data=='1'){
+			// 			alert('登录成功');
+			// 			window.location.href='index.html';
+			// 		}
+			// 		else{
+			// 			alert('提示','用户名或密码错误！');
+			// 		}
+			// 	}
+			// });
+			// $("#loginFrm").submit();
+
+			 
+
 			$("#loginFrm").form({
-				url:'LoginServlet',
-				success:function(data){
-					if(data=='1'){
+				function(){
+					if(checkUser()){
+						alert('登录成功');
 						window.location.href='index.html';
 					}
 					else{
-						$.messager.alert('提示','用户名或密码错误！');
+						alert('提示','用户名或密码错误！');
 					}
 				}
 			});
 			$("#loginFrm").submit();
 		}
-		//文档加载之后执行
-		$(function(){
-			$("#loginDialog").dialog({
-				//设置dialog的属性
-				title:'有家超市经营助手',
-				buttons:[
-					{text:'登录',handler:function(){
-						//执行表单提交
-						doLogin();
-						}},
-					{text:'注册'}
-				]
-				
-				});
-		});
+
+
 		</script>
 
 		<style>
@@ -60,13 +67,13 @@
 						<img src="images/lg.png" alt=""/>
 					</div>
 			<form id="loginFrm" method="post" action="LoginServlet">
-				<input type="textC" id="uid" name="uname" class="text fontC" value="请输入注册手机号" onpropertychange='check(this.value)' oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入注册手机号';this.color=#E8E8E8;}" >
-				<input type="passwordC" class="fontC" name="password" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
+				<input type="textC" name="uname" id="uname" class="text fontC" value="请输入注册手机号" onpropertychange='check(this.value)' oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入注册手机号';this.color=#E8E8E8;}" >
+				<input type="passwordC" class="fontC" name="password" id="pwd" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
 				<div class="submit">
-					<input type="submit" class="fontC" onclick="" value="登录" >
+					<input type="submit" class="fontC" onclick="doLogin();return false;" value="登录" >
 				</div>	
 				<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal" class="fontC">忘记密码？</a></p>
-			</form>
+				</form>
 		</div>
 			<!--//End-login-form-->
 					<!-- Button trigger modal -->
@@ -93,7 +100,7 @@
 			<div class="container-fluid">
 			        <div class="row">
 			            <div class="col-md-10 col-md-offset-1">
-			                <form id="signupForm" method="post" class="form-horizontal" action="target.php">
+			                <form id="frmForgetPwd" method="post" class="form-horizontal" >
 			                    <div class="form-group">
 			                        <label class="col-md-3 control-label fontC">手机号</label>
 
@@ -125,6 +132,11 @@
 			                            <span class="help-block fontC">请再次输入您的新密码。</span>
 			                        </div>
 			                    </div>
+			                    <div class="form-group">
+			                        <div class="col-lg-9 col-lg-offset-3">
+			                            <button type="submit" class="btn btn-primary">Submit</button>
+			                        </div>
+			                    </div>
 			                </form>
 			            </div>
 			        </div>
@@ -133,7 +145,7 @@
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default fontC" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-danger fontC">提交</button>
+	        <button type="submit" class="btn btn-danger fontC">提交</button>
 	      </div>
 	    </div>
 	  </div>
@@ -145,6 +157,7 @@
 	$('#exampleModal').on('shown.bs.modal', function () {
 	  $('#myInput').focus()
 	})
+
 	function check(uid){
         var r=/^[0-9]+.?[0-9]*$/;
         if(!r.test(uid)){ //isNaN也行的,正则可以随意扩展
@@ -153,7 +166,7 @@
     }
 
     $(document).ready(function() {
-    $('#signupForm').bootstrapValidator({
+    $('#frmForgetPwd').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -161,50 +174,71 @@
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            full_name: {
+            uname: {
                 validators: {
                     notEmpty: {
                         message: 'The full name is required and cannot be empty'
                     }
                 }
             },
-            password: {
+            verify_code: {
                 enabled: false,
                 validators: {
                     notEmpty: {
                         message: 'The password is required and cannot be empty'
                     },
-                    identical: {
-                        field: 'confirm_password',
-                        message: 'The password and its confirm must be the same'
-                    }
+    
                 }
             },
-            confirm_password: {
+            new_password: {
                 enabled: false,
                 validators: {
                     notEmpty: {
                         message: 'The confirm password is required and cannot be empty'
                     },
                     identical: {
-                        field: 'password',
+                        field: 'confirm_password',
                         message: 'The password and its confirm must be the same'
                     }
                 }
             }
+            // confirm_password: {
+            //     enabled: false,
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The confirm password is required and cannot be empty'
+            //         },
+            //         identical: {
+            //             field: 'new_password',
+            //             message: 'The password and its confirm must be the same'
+            //         }
+            //     }
+            // }
         }
     });
 
     // Enable the password/confirm password validators if the password is not empty
-    $('#signupForm').find('[name="password"]').on('keyup', function() {
+    $('#frmForgetPwd').find('[name="new_password"]').on('keyup', function() {
         var isEmpty = $(this).val() == '';
-        $('#signupForm').bootstrapValidator('enableFieldValidators', 'password', !isEmpty)
+        $('#frmForgetPwd').bootstrapValidator('enableFieldValidators', 'new_password', !isEmpty)
                         .bootstrapValidator('enableFieldValidators', 'confirm_password', !isEmpty);
         if ($(this).val().length == 1) {
-            $('#signupForm').bootstrapValidator('validateField', 'password')
+            $('#frmForgetPwd').bootstrapValidator('validateField', 'new_password')
                             .bootstrapValidator('validateField', 'confirm_password');
         }
     });
+});
+
+  //   function doCheckInfo(){
+		// 	//document.getElementById("文本框名").value
+		// 	var oName=document.getElementById("uname");
+		// 	var nPwd=document.getElementById("pwd");
+		// 	//if((document.loginFrm.uname.value==''or document.loginFrm.uname.value=='请输入注册手机号')&&(document.loginFrm.password.value==''or document.loginFrm.password.value=='******'))
+		// 	if((oName.value==''or oName.value=='请输入注册手机号')&&(nPwd.value==''or nPwd.value=='******'))
+		// 	{
+		// 		alert('提示','用户名或密码不可为空！');
+		// 	}
+		// };
 //	$('#exampleModal').on('show.bs.modal', function (event) {
 //  var button = $(event.relatedTarget) // Button that triggered the modal
 //  var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -215,7 +249,6 @@
 //  modal.find('.modal-body input').val(recipient)
 //})
 </script>
-
 
 		
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
