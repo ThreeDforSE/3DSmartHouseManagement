@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="3DSmartHouseManagement"
+  id="myeclipse.1467083250045"
+  context-root="/3DSmartHouseManagement"
+  j2ee-spec="5.0"
+  archive="3DSmartHouseManagement.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
