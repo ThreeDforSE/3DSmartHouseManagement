@@ -67,6 +67,7 @@
 
 
 	//创建div
+	//url 按钮指向,id 模块名,img_src 图片地址,name 产品名,model 产品型号,state 产品状态（判断坐标是否有数据即可）
 	function createProductDiv(url,id,img_src,name,model,state){
 	 var oriDiv=document.getElementById("product_list_group");
 	 var newA=document.createElement("a");
