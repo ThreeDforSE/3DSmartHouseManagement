@@ -132,20 +132,21 @@
 	<div id="WebGL-output">
 	</div>
 
-
-	<div style="position: absolute; z-index: 300;height: 1000px; width: 30px; background-color: #F8F8FF; top: 50px; left:0px;">
-		<div style="left:8px; top: 10px; margin-left: 8px; margin-top: 10px;">
-			<span class="glyphicon glyphicon-align-justify " aria-hidden="true"></span>		
-		</div>
-		<div>
-			<p class="fontC" style="margin-left: 8px;margin-top:10px;font-size: 12px;">我 的 产 品 列 表</p>
+	<div id="hidden_list">
+		<div  class="box-vertical">
+			<div style="left:8px; top: 10px; margin-left: 8px; margin-top: 10px;">
+				<span class="glyphicon glyphicon-align-justify " aria-hidden="true"></span>		
+			</div>
+			<div>
+				<p class="fontC" style="margin-left: 8px;margin-top:10px;font-size: 12px;">我 的 产 品 列 表</p>
+			</div>
 		</div>
 
 	</div>
-	<!-- Button trigger modal -->
-	<button type="button" class="btnLeft" style="position: absolute; z-index:100;top: 250px;left: 30px;" data-toggle="modal" data-target="#productListModal">
-		<span class="glyphicon glyphicon-chevron-right" ></span>
-	</button>
+		<!-- 左右按钮 -->
+		<button type="button" class="btnLeft" id="btn_control" style="position: absolute; z-index:180;top: 250px;left: 25px;" onclick="showSideLsit()">
+			<span id="sp_control" class="glyphicon glyphicon-chevron-right" ></span>
+		</button>
 
 	<!-- ProductLiatModal -->
 	<div class="modal fade" id="productListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -167,7 +168,7 @@
 	</div>
 
 	<!-- ViewModeModal -->
-	<div class="row fontC" style="position: absolute; z-index:200;top: 60px;left: 100px;">
+	<div class="row fontC" style="position: absolute; z-index:200;top: 60px;left: 200px;">
 		<div class="col-md-12 col-md-offset-3">
 			<button type="button" id="mode3D" class="btnLine btn-grey active col-md-6" onclick="threeMode()">3D</button>
 			<button type="button" id="modePlane" class="btnLine btn-grey col-md-6 " onclick="planeMode()">平面</button>
@@ -175,12 +176,48 @@
 	</div>
 
 	<!-- SaveEditModal -->
-	<div class="row fontC" style="position: absolute; z-index:200;top: 60px;right: 40px;">
+	<div class="row fontC save-button">
 		<div class="col-md-12 col-md-offset-3">
 			<button type="button" id="editSave" class="btnLine btn-orange active col-md-6 " onclick="editMode()" style="display: none;">保存</button>
 			<button type="button" id="editCancel" class="btnLine btn-orange col-md-6 " onclick="editMode()" style="display: none;">取消</button>
 		</div>
 	</div>
+
+	<div id="shown_list" class="side-list-my" style="visibility: hidden;">
+		<div class="box-horizontal">
+			<p class="fontC" align="center" style="margin-top:10px;">我的产品列表</p>
+		</div>
+		<div align="center" style="margin-left:0px; width:100%;height:100%;left:0px;top:90px;position:absolute;z-index:150;">
+			<iframe src="sidemodel.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+		</div>
+		<div>
+			
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var flag=0;
+		function showSideLsit() {
+			var hl=document.getElementById('hidden_list');
+			var sl=document.getElementById('shown_list');
+			var sp=document.getElementById('sp_control');
+			var btn=document.getElementById('btn_control');
+			if(flag==0){
+				hl.style.visibility="hidden";
+				sl.style.visibility="visible";
+				btn.style.left =185;
+				sp.setAttribute("class","glyphicon glyphicon-chevron-left");
+				flag=1;
+			}else{
+				hl.style.visibility="visible";
+				sl.style.visibility="hidden";
+				btn.style.left =25; 
+				sp.setAttribute("class","glyphicon glyphicon-chevron-right");				
+				flag=0;
+			}
+		}
+	</script>
+	
 
 </body>
 </html>

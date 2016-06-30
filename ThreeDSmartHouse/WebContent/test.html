@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录-ApNut智能家居管理系统 v1.0</title>
+		<meta charset="utf-8">
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="application/x-javascript"> 
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+		
+		function doLogin(){
+			$("#loginFrm").form({
+				url:'LoginServlet',
+				success:function(data){
+					if(data=='1'){
+						window.location.href='index.html';
+					}
+					else{
+						$.messager.alert('提示','用户名或密码错误！');
+					}
+				}
+			});
+			$("#loginFrm").submit();
+		}
+		//文档加载之后执行
+		$(function(){
+			$("#loginDialog").dialog({
+				//设置dialog的属性
+				title:'有家超市经营助手',
+				buttons:[
+					{text:'登录',handler:function(){
+						//执行表单提交
+						doLogin();
+						}},
+					{text:'注册'}
+				]
+				
+				});
+		});
+		</script>
+
+		<style>
+			body{
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+</head>
+
+<body>
+<!-- Button trigger modal -->
+<button type="button" class="btnLeft" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

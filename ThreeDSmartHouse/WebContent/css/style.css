@@ -30,11 +30,43 @@ img{max-width:100%;}
 /****-----start-body----****/
 body,html{
 	position: relative;
-	background:#B0C4DE;
  	font-family: 'Open Sans', sans-serif,\5fae\8f6f\96c5\9ed1;
  	height: 100%;
  	margin:0px;
 	width: 100%;
+}
+
+.box-horizontal{
+	background-color:#f8f8f8; 
+	width:185px;
+	height:40px;
+	top:50px;
+	border: 1px solid #e5e5e5;
+	position:absolute;
+	z-index:190;
+	font-weight :bold;
+}
+
+.box-vertical{
+	position: absolute; 
+	z-index: 185;
+	height: 1000px; 
+	width: 30px; 
+	background-color: #f8f8f8; 
+	border: 1px solid #e5e5e5;
+	top: 50px; 
+	left:0px;
+}
+
+.save-button{
+  position: absolute;
+   z-index:200;
+   top: 60px;
+   right: 40px;
+}
+
+.side-list-my{
+  margin-top: 5px;
 }
 
 .modal-headerC {
@@ -44,6 +76,7 @@ body,html{
   border-bottom: 1px solid #e5e5e5;
   color:#FFFAF0;
 }
+
 
 .modal-headerB {
   background-color:#4F94CD;
@@ -148,7 +181,7 @@ font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
 }
 
 .btnLeft {
-	width: 30px;
+	width: 20px;
 	height: 55px;
   display: inline-block;
   padding: 6px 12px;
@@ -456,6 +489,34 @@ fieldset[disabled] .btn-orange.active {
   }
 }
 
+
+.thumbnailC {
+  display: block;
+  padding: 2px;
+  margin-bottom: 0px;
+  line-height: 1.42857143;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  -webkit-transition: border .2s ease-in-out;
+       -o-transition: border .2s ease-in-out;
+          transition: border .2s ease-in-out;
+}
+.thumbnailC > img,
+.thumbnailC a > img {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+a.thumbnailC:hover,
+a.thumbnailC:focus,
+a.thumbnailC.active {
+  border-color: #337ab7;
+}
+.thumbnailC .caption {
+  padding: 9px;
+  color: #333;
+  font-size: 12px;
+}
 
 input， label，p, select， option， textarea， button， fieldset， legend { 
 font-family: 'Microsoft YaHei';
