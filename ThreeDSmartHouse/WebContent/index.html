@@ -11,10 +11,10 @@
 		<script type="text/javascript" src="js/three.js"></script>
 		<script type="text/javascript" src="js/SceneLoader.js"></script>
    		<script type="text/javascript" src="js/SceneExporter.js"></script>
-   		<script type="text/javascript" src="js/stats.js"></script>
     	<script type="text/javascript" src="js/dat.gui.js"></script>
-    	<script type="text/javascript" src="js/buttonControl.js"></script>
+    	<script type="text/javascript" src="js/IndexControl.js"></script>
     	<script type="text/javascript" src="js/webGL.js"></script>
+    	<script type="text/javascript" src="js/ValidateCode.js"></script>
 		<script type="application/x-javascript"> 
 			addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 		</script>
@@ -25,7 +25,9 @@
 			}
 		</style>
 </head>
+
 <body>
+	<!-- 导航条 -->
 	<nav class="navbar navbar-default fontC navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">ApNut科技</a>
@@ -64,7 +66,78 @@
 		</div>
 	</nav>
 
-	<!-- UserAccountModal -->
+		<!-- WebGL 3D模块 -->
+	<div id="WebGL-output">
+	</div>
+
+	<!-- 视图按钮组 -->
+	<div class="row fontC" style="position: absolute; z-index:200;top: 60px;left: 200px;">
+		<div class="col-md-12 col-md-offset-3">
+			<button type="button" id="mode3D" class="btnLine btn-grey active col-md-6" onclick="planeMode()">3D</button>
+			<button type="button" id="modePlane" class="btnLine btn-grey col-md-6 " onclick="planeMode()">平面</button>
+		</div>
+	</div>
+
+	<!-- 保存按钮组 -->
+	<div class="row fontC save-button">
+		<div class="col-md-12 col-md-offset-3">
+			<button type="button" id="editSave" class="btnLine btn-orange active col-md-6 " onclick="editMode()" style="display: none;">保存</button>
+			<button type="button" id="editCancel" class="btnLine btn-orange col-md-6 " onclick="editMode()" style="display: none;">取消</button>
+		</div>
+	</div>
+
+	<!-- 左右按钮 -->
+	<button type="button" class="btnLeft" id="btn_control" style="position: absolute; z-index:180;top: 40%;left: 25px;" onclick="showSideLsit()">
+		<span id="sp_control" class="glyphicon glyphicon-chevron-right" ></span>
+	</button>
+
+	<!-- 隐藏状态边栏 -->
+	<div id="hidden_list" class="box-vertical">
+			<div style="left:8px; top: 10px; margin-left: 8px; margin-top: 10px;">
+				<span class="glyphicon glyphicon-align-justify " aria-hidden="true"></span>		
+			</div>
+			<div>
+				<p class="fontC" style="margin-left: 8px;margin-top:10px;font-size: 12px;">我 的 产 品 列 表</p>
+			</div>
+	</div>
+
+	<!-- 显示状态边栏 -->	
+	<div id="shown_list" style="visibility:hidden;">
+		<div class="box-horizontal">
+			<p class="fontC" align="center" style="margin-top:10px;font-weight :bold;"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>  我的产品列表</p>
+		</div>
+		<div id="product_list_group" class="list-group"  style="width:230px;height:100%; overflow-y:auto;left:0px;top:90px;position:absolute;z-index:250;">
+				<a href="#" class="list-group-itemC fontC row">
+		  			<img src="images/tv1.png" class="col-md-6">
+		  			<div class="col-md-6">
+					<h5 class="list-group-item-heading">平板电视</h5>
+			    	<p class="list-group-item-textC">AT-01L</p>
+			    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
+					</div>
+		  		</a>
+				
+			
+				<a href="#" class="list-group-itemC fontC row">
+		  			<img src="images/pc1.png" class="col-md-6">
+		  			<div class="col-md-6">
+						<h5 class="list-group-item-heading">笔记本</h5>
+				    	<p class="list-group-item-textC">AP-01T</p>
+				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
+					</div>
+		  		</a>
+
+		  		<a href="#" class="list-group-itemC fontC row">
+		  			<img src="images/refrig_1.png" class="col-md-6">
+		  			<div class="col-md-6">
+						<h5 class="list-group-item-heading">单开门冰箱</h5>
+				    	<p class="list-group-item-textC">AT-01L</p>
+				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 00/ 01</p>
+					</div>
+		  		</a>
+		</div>
+	</div>
+
+		<!-- 用户信息设置模块 -->
 	<div class="modal fade fontC" id="userSettingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -88,7 +161,7 @@
 			                        <label class="col-md-3 control-label fontC">更换手机号</label>
 
 			                        <div class="col-md-8">
-			                            <input type="text" class="form-control input-lg fontC" name="uname" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
+			                            <input type="text" id="phone_num" class="form-control input-lg fontC" name="uname" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
 			                        </div>
 			                    </div>
 
@@ -97,7 +170,7 @@
 			                        <div class="col-md-4">
 			                            <input type="text" class="form-control input-lg fontC" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
 			                        </div>
-			                        <button type="button" class="btn btn-primary btn-lg col-md-3 fontC">发送验证码</button>
+			                        <input type="button" id="btn_SendVC" class="btn btn-primary btn-lg col-md-3 fontC" value="获取验证码"/>
 			                    </div>
 
 			                    <div class="form-group">
@@ -121,103 +194,24 @@
 			 </div>
 	      </div>
 	      <div class="modal-footer">
-	      <button type="button" class="btn btn-primary">保存修改</button>
+	     	<button type="button" class="btn btn-primary">保存修改</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	        	      </div>
+	       </div>
 	    </div>
 	  </div>
 	</div>
 
-		<!-- Div which will hold the Output -->
-	<div id="WebGL-output">
-	</div>
 
-	<div id="hidden_list">
-		<div  class="box-vertical">
-			<div style="left:8px; top: 10px; margin-left: 8px; margin-top: 10px;">
-				<span class="glyphicon glyphicon-align-justify " aria-hidden="true"></span>		
-			</div>
-			<div>
-				<p class="fontC" style="margin-left: 8px;margin-top:10px;font-size: 12px;">我 的 产 品 列 表</p>
-			</div>
-		</div>
-
-	</div>
-		<!-- 左右按钮 -->
-		<button type="button" class="btnLeft" id="btn_control" style="position: absolute; z-index:180;top: 250px;left: 25px;" onclick="showSideLsit()">
-			<span id="sp_control" class="glyphicon glyphicon-chevron-right" ></span>
-		</button>
-
-	<!-- ProductLiatModal -->
-	<div class="modal fade" id="productListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	<!-- ViewModeModal -->
-	<div class="row fontC" style="position: absolute; z-index:200;top: 60px;left: 200px;">
-		<div class="col-md-12 col-md-offset-3">
-			<button type="button" id="mode3D" class="btnLine btn-grey active col-md-6" onclick="threeMode()">3D</button>
-			<button type="button" id="modePlane" class="btnLine btn-grey col-md-6 " onclick="planeMode()">平面</button>
-		</div>
-	</div>
-
-	<!-- SaveEditModal -->
-	<div class="row fontC save-button">
-		<div class="col-md-12 col-md-offset-3">
-			<button type="button" id="editSave" class="btnLine btn-orange active col-md-6 " onclick="editMode()" style="display: none;">保存</button>
-			<button type="button" id="editCancel" class="btnLine btn-orange col-md-6 " onclick="editMode()" style="display: none;">取消</button>
-		</div>
-	</div>
-
-	<div id="shown_list" class="side-list-my" style="visibility: hidden;">
+	<!-- 产品列表-打开状态-废弃
+	<div id="shown_list" class="side-list-my" 。>
 		<div class="box-horizontal">
 			<p class="fontC" align="center" style="margin-top:10px;">我的产品列表</p>
 		</div>
 		<div align="center" style="margin-left:0px; width:100%;height:100%;left:0px;top:90px;position:absolute;z-index:150;">
 			<iframe src="sidemodel.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 		</div>
-		<div>
-			
-		</div>
 	</div>
-
-	<script type="text/javascript">
-	var flag=0;
-		function showSideLsit() {
-			var hl=document.getElementById('hidden_list');
-			var sl=document.getElementById('shown_list');
-			var sp=document.getElementById('sp_control');
-			var btn=document.getElementById('btn_control');
-			if(flag==0){
-				hl.style.visibility="hidden";
-				sl.style.visibility="visible";
-				btn.style.left =185;
-				sp.setAttribute("class","glyphicon glyphicon-chevron-left");
-				flag=1;
-			}else{
-				hl.style.visibility="visible";
-				sl.style.visibility="hidden";
-				btn.style.left =25; 
-				sp.setAttribute("class","glyphicon glyphicon-chevron-right");				
-				flag=0;
-			}
-		}
-	</script>
-	
+	 -->
 
 </body>
 </html>
