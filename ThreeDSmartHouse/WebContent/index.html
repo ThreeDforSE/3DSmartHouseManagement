@@ -105,12 +105,12 @@
 	</div>
 
 	<!-- 显示状态边栏 -->	
-	<div id="shown_list" style="visibility:hidden;">
+	<div id="shown_list" style="display:none;">
 		<div class="box-horizontal">
 			<p class="fontC" align="center" style="margin-top:10px;font-weight :bold;"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>  我的产品列表</p>
 		</div>
 		<div id="product_list_group" class="list-group"  style="width:230px;height:100%; overflow-y:auto;left:0px;top:90px;position:absolute;z-index:250;">
-				<a href="#" class="list-group-itemC fontC row">
+				<a href="#" class="list-group-itemC fontC row" onclick="showInfo()">
 		  			<img src="images/tv1.png" class="col-md-6">
 		  			<div class="col-md-6">
 					<h5 class="list-group-item-heading">平板电视</h5>
@@ -139,6 +139,35 @@
 		  		</a>
 		</div>
 	</div>
+
+
+
+
+<div id="tb_detailInfo" class="panel panel-detailinfo fontC" style="width:500px;top:20%;left: 20%; position:absolute; z-index:200;display:none;">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+  	产品详情
+  	<button type="button" class="close" onclick="dismiss()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="panel-body row">
+	  <div class="col-md-8">
+	  	<h2 align="center">平板电视</h2>
+	    <p align="center">AT-01L</p>
+	  </div>
+	  <div class="col-md-4">
+	  	<button type="button" class="btn btn-lg disabled" style="margin-top:15px;right:100px;">查看实时状态</button>
+	  </div>
+  </div>
+  <!-- Table -->
+  <table class="table">
+    <tr>    	<td>商品名称</td>    	<td>平板电视</td>    	<td>型    号</td>    	<td>AT-01L</td>    </tr>
+    <tr>    	<td>类    型</td>    	<td>液晶电视</td>    	<td>颜    色</td>    	<td>黑    色</td>    </tr>
+    <tr>    	<td>分辨率</td>    	<td>3840×2160</td>    	<td>屏幕尺寸</td>    	<td>55英寸</td>    </tr>
+    <tr>    	<td>屏幕比例</td>    	<td>16:9</td>    	<td>电源电压</td>    	<td>220V</td>    </tr>
+    <tr>    	<td>功率</td>    	<td>196W</td>    	<td>上市时间</td>    	<td>2015.8</td>    </tr>
+  </table>
+</div>
+
 
 		<!-- 用户信息设置模块 -->
 	<div class="modal fade fontC" id="userSettingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -203,8 +232,6 @@
 	    </div>
 	  </div>
 	</div>
-
-
 	<!-- 产品列表-打开状态-废弃
 	<div id="shown_list" class="side-list-my" 。>
 		<div class="box-horizontal">

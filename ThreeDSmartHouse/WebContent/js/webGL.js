@@ -1,40 +1,29 @@
     function init() {
        	var count=0;
-        //var stats = initStats();
         var clock = new THREE.Clock();
 
-        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        // 创建场景
         var scene = new THREE.Scene();
 
-        // create a camera, which defines where we're looking at.
+        // 创建摄像机
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        // create a render and set the size
-        // var renderer = new THREE.WebGLRenderer();
-
-        // renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
-        // renderer.setSize(window.innerWidth, window.innerHeight);
 
         var webGLRenderer = new THREE.WebGLRenderer();
         webGLRenderer.setClearColor(new THREE.Color(0x000, 1.0));
         webGLRenderer.setSize(window.innerWidth, window.innerHeight);
         webGLRenderer.shadowMapEnabled = true;
 
+        //将摄像机与轨迹球绑定
         var trackballControls = new THREE.TrackballControls(camera);
 
         trackballControls.rotateSpeed = 1.0;
         trackballControls.zoomSpeed = 1.0;
         trackballControls.panSpeed = 1.0;
-//        trackballControls.noZoom=false;
-//        trackballControls.noPan=false;
         trackballControls.staticMoving = true;
-//        trackballControls.dynamicDampingFactor=0.3;
-
 
         var projector = new THREE.Projector();
         document.addEventListener('mousedown', onDocumentMouseDown, false);
-        // document.addEventListener('mousemove', onDocumentMouseMove, false);
-        //document.addEventListener('mousover', onDocumentMouseOver, false);
 
         
         initPlane(scene);
@@ -43,19 +32,8 @@
         var sphere = initSphere(scene); 
         var refrig = initRefrig(scene); 
         setCamera(camera,scene);
+        var ambientLight = initAmbientLight(scene);
 
-        // var cylinderGeometry = new THREE.CylinderGeometry(2, 2, 20);
-        // var cylinderMaterial = new THREE.MeshLambertMaterial({color: 0x77ff77});
-        // var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
-
-        // cylinder.position.set(0, 0, 1);
-
-        // scene.add(cylinder);
-
-        // add subtle ambient lighting
-        // var ambientLight = new THREE.AmbientLight(0x0c0c0c);
-        var ambientLight = new THREE.AmbientLight(0x383838);
-        scene.add(ambientLight);
 
         // add spotlight for the shadows
         var spotLight = new THREE.SpotLight(0xffffff);
@@ -63,74 +41,20 @@
         spotLight.intensity = 1;
         scene.add(spotLight);
 
-        // add the output of the renderer to the html element
-        // document.getElementById("WebGL-output").appendChild(renderer.domElement);
+        // 输出到页面
         document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
 
         // call the render function
         var step = 0;
         var scalingStep = 0;
-
-        // var loader = new THREE.OBJMTLLoader();
-        // var load = function (object) {
-        //     var scale = chroma.scale(['red', 'green', 'blue']);
-        //     setRandomColors(object, scale);
-        //     mesh = object;
-        //     scene.add(mesh);
-        // };
-
-        // var controls = new function () {
-        //     this.rotationSpeed = 0.02;
-        //     this.bouncingSpeed = 0.03;
-        //     this.scalingSpeed = 0.03;
-        //     this.showRay = false;
-        // };
-
-        // var gui = new dat.GUI();
-        // gui.add(controls, 'rotationSpeed', 0, 0.5);
-        // gui.add(controls, 'bouncingSpeed', 0, 0.5);
-        // gui.add(controls, 'scalingSpeed', 0, 0.5);
-        // gui.add(controls, 'showRay').onChange(function (e) {
-        //     if (tube) scene.remove(tube)
-        // });
-
        
         render();
 
         function render() {
             var delta = clock.getDelta();
-
-            // if (mesh) {
-            //     //   mesh.rotation.y+=0.006;
-            // }
-
-
             trackballControls.update(delta);
-            //webGLRenderer.clear();
-            // render using requestAnimationFrame
-        //    stats.update();
-            // rotate the cube around its axes
-            // cube.rotation.x += controls.rotationSpeed;
-            // cube.rotation.y += controls.rotationSpeed;
-            // cube.rotation.z += controls.rotationSpeed;
-
-            // // bounce the sphere up and down
-            // step += controls.bouncingSpeed;
-            // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-            // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
-
-            // // scale the cylinder
-
-            // scalingStep += controls.scalingSpeed;
-            // var scaleX = Math.abs(Math.sin(scalingStep / 4));
-            // var scaleY = Math.abs(Math.cos(scalingStep / 5));
-            // var scaleZ = Math.abs(Math.sin(scalingStep / 7));
-            // cylinder.scale.set(scaleX, scaleY, scaleZ);
-
-            // render using requestAnimationFrame
             webGLRenderer.render(scene, camera);
             requestAnimationFrame(render);
-
         }
 
         var projector = new THREE.Projector();
@@ -143,8 +67,6 @@
             var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
 
             var intersects = raycaster.intersectObjects([sphere, cube, refrig]);
-            // var intersects = raycaster.intersectObjects([sphere, cylinder, cube]);
-
             if (intersects.length > 0) {
             	if(count==0){
             		console.log(intersects[0]);
@@ -158,6 +80,7 @@
                 intersects[0].object.material.transparent = false;
                 intersects[0].object.material.opacity = 1;
                 count=0;
+                forTest2();
           		}
                 
             }
@@ -170,8 +93,6 @@
             var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
 
             var intersects = raycaster.intersectObjects([sphere, cube, refrig]);
-            // var intersects = raycaster.intersectObjects([sphere, cylinder, cube]);
-
             if (intersects.length > 0) {
                 if(count==0){
                     console.log(intersects[0]);
@@ -190,40 +111,8 @@
             }
         }
 
-			function forTest(){
-            		alert('弹窗测试');
-    			}
-        // function onDocumentMouseMove(event) {
-        //     if (controls.showRay) {
-        //         //用户点击位置向量
-        //         var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-        //         vector = vector.unproject(camera); //将点击位置转换成场景坐标
-
-        //         //从点击位置发射一束光线
-        //         var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
-        //         //判断指定对象有没有被这束光线击中
-        //         var intersects = raycaster.intersectObjects([sphere, cube, refrig]);
-        //         // var intersects = raycaster.intersectObjects([sphere, cylinder, cube]);
-
-        //         if (intersects.length > 0) {
-        //             var points = [];
-        //             points.push(new THREE.Vector3(-30, 39.8, 30));
-        //             points.push(intersects[0].point);
-
-        //             var mat = new THREE.MeshBasicMaterial({color: 0xff0000, transparent: true, opacity: 0.9});
-        //             var tubeGeometry = new THREE.TubeGeometry(new THREE.SplineCurve3(points), 60, 0.001);
-
-        //             if (tube) scene.remove(tube);
-
-        //             if (controls.showRay) {
-        //                 tube = new THREE.Mesh(tubeGeometry, mat);
-        //                 scene.add(tube);
-        //             }
-        //         }
-        //     }
-        // }
-
-   
+			
+  
     }
      function initGrid(scene){
         var helper = new THREE.GridHelper( 1000, 50 );
@@ -310,4 +199,69 @@
         // camera.lookAt(scene.position);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
+
+    function initAmbientLight(scene){
+        var ambientLight = new THREE.AmbientLight(0x383838);
+        scene.add(ambientLight);
+        return ambientLight;
+    }
+
+    function forTest(){
+        // <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" 
+        // data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        //   Popover on 右侧
+        // </button>
+
+        // <div align="center" style="margin-left:0px; width:100%;height:100%;left:0px;top:90px;position:absolute;z-index:150;">
+        //     <iframe src="sidemodel.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+        // </div>
+        var odiv=document.getElementById("infoDiv");
+        if(odiv){
+            odiv.style.display="inline";
+
+        }else{
+            var div=document.createElement("div");
+        div.setAttribute("align","center");
+        // div.style.width="100%";
+         div.style.height="100%";
+        div.style.left="75%";
+        div.style.top="25%";
+        div.style.position="absolute";
+        div.style.zindex="200";
+        div.setAttribute("id","infoDiv");
+        document.body.appendChild(div);
+
+        var iframe=document.createElement("iframe");
+        iframe.setAttribute("src","test.html");
+        iframe.style.width="100%";
+        iframe.style.height="100%";
+        iframe.style.frameborder="0";
+        iframe.style.scrolling="no";
+        div.appendChild(iframe);
+        }
+        
+
+        // var btn=document.createElement("button");
+        // btn.setAttribute("type","button");
+        // btn.setAttribute("class","btn btn-default");
+        // btn.setAttribute("data-container","body");
+        // btn.setAttribute("data-toggle","popover");
+        // btn.setAttribute("data-placement","right");
+        // btn.setAttribute("data-content","for test");
+        // btn.setAttribute("id","ex")
+        // btn.innerHTML="test";
+        // btn.style.position="absolute";
+        // btn.style.zindex="200";
+        // btn.style.top="90px";
+        // btn.style.left="90px";
+        // document.body.appendChild(btn);
+
+    }
+
+    function forTest2(){
+        document.getElementById("infoDiv").style.display="none";
+    }
+
+    $('#ex').popover('show');
+
     window.onload = init;
