@@ -60,7 +60,7 @@ function doPostBack(url,backFunc,queryParam) {
         async : false,
         cache : false,
         type : 'POST',
-        url : url,// 请求的action路径
+        url : ,// 请求的action路径
         data:queryParam,
         error : function() {// 请求失败处理函数
         },
