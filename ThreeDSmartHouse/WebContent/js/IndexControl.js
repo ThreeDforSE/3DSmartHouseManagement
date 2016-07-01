@@ -58,7 +58,7 @@
 				flag=1;
 			}else{
 				hl.style.display="inline";
-				sl.style.display="inline";
+				sl.style.display="none";
 				btn.style.left ="25px"; 
 				sp.setAttribute("class","glyphicon glyphicon-chevron-right");				
 				flag=0;
