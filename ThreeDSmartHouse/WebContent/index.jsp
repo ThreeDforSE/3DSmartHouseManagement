@@ -32,6 +32,20 @@
 </head>
 
 <body>
+	<!-- 判断是否已经登录 -->
+	<%  
+  		if(session.getAttribute("uid")==null)
+  		{%>
+  		<div class="alert alert-danger" role="alert">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  			<span class="sr-only">Error:</span>
+  			您当前没有登录！3秒后将跳转到登录页面……<a href="login.jsp" class="alert-link">如果没有跳转，请点击此处立即跳转。</a>
+		</div>
+    	<%
+        response.setHeader("refresh","3;URL=login.jsp");
+        return;
+   		}
+   	%>
 	<!-- 导航条 -->
 	<nav class="navbar navbar-default fontC navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
@@ -58,12 +72,12 @@
 					</li>
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${sessionScope.uname}
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="#foo" id="accountInfo" data-toggle="modal" data-target="#userSettingModal">账户信息</a></li>
-						<li><a href="#">退出</a></li>
+						<li><a href="LogoutServlet">退出</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -116,7 +130,7 @@
 		  			<img src="images/tv1.png" class="col-md-6">
 		  			<div class="col-md-6">
 					<h5 class="list-group-item-heading">平板电视</h5>
-			    	<p class="list-group-item-textC">AT-01L</p>
+			    	<p class="list-group-item-textC" id="AT01L">AT01L</p>
 			    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
 					</div>
 		  		</a>
@@ -162,7 +176,7 @@
   </div>
   <!-- Table -->
   <table class="table">
-    <tr>    	<td>商品名称</td>    	<td>平板电视</td>    	<td>型    号</td>    	<td>AT-01L</td>    </tr>
+    <tr>    	<td >商品名称</td>    	<td>平板电视</td>    	<td>型    号</td>    	<td>AT-01L</td>    </tr>
     <tr>    	<td>类    型</td>    	<td>液晶电视</td>    	<td>颜    色</td>    	<td>黑    色</td>    </tr>
     <tr>    	<td>分辨率</td>    	<td>3840×2160</td>    	<td>屏幕尺寸</td>    	<td>55英寸</td>    </tr>
     <tr>    	<td>屏幕比例</td>    	<td>16:9</td>    	<td>电源电压</td>    	<td>220V</td>    </tr>
@@ -195,7 +209,7 @@
 			                        <label class="col-md-3 control-label fontC">更换手机号</label>
 
 			                        <div class="col-md-8">
-			                            <input type="text" id="phone_num" class="form-control input-lg fontC" name="uname" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
+			                            <input type="text" id="phone_num" class="form-control input-lg fontC" name="phone_num" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
 			                        </div>
 			                    </div>
 
@@ -244,5 +258,8 @@
 		</div>
 	</div>
 	 -->
+	 
+	 <script type="text/javascript">
+	 </script>
 </body>
 </html>
