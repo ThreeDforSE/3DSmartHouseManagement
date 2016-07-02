@@ -58,7 +58,7 @@ body,html{
           user-select: none;
   background-image: none;
   border: 1px solid #f8f8f8;
-  border-radius: 3px;
+  border-radius: 1px;
   position: absolute;
   z-index: 100;
 }
@@ -280,6 +280,22 @@ fieldset[disabled] .btn-orange.active {
 
 .fontC{
 font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
+}
+
+.icon {
+    display: inline-block;
+    width: 20px; height: 20px;
+    overflow: hidden;
+}
+.icon-del {
+    background: url(images/heart.png) no-repeat center;
+}
+.icon > .icon {
+    position: relative;
+    left: -20px;
+    border-right: 20px solid transparent;
+    -webkit-filter: drop-shadow(20px 0);
+    filter: drop-shadow(20px 0);    
 }
 
 .list-group {
@@ -583,6 +599,26 @@ button.list-group-itemC {
     color: #ccc;
     background-color: #e7e7e7;
   }
+}
+
+.panel-detailinfo {
+  border-color: #ddd;
+}
+.panel-detailinfo > .panel-heading {
+  color: #f7fef1;
+  background-color: #add585;
+  border-color: #ddd;
+  font-size: 20px;
+}
+.panel-detailinfo > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
+}
+.panel-detailinfo > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+.panel-detailinfo > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
 }
 
 .save-button{

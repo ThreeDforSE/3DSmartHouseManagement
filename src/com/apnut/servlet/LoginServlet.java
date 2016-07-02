@@ -58,8 +58,9 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		response.setContentType("text/html;charset=UTF-8");
 		String information="";
-
+		PrintWriter out=response.getWriter();
 		UserDao userDao=new UserDao();
 		//����û���������
 		String uname=request.getParameter("uname");
@@ -73,13 +74,14 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("uid", client.getUid());
 			session.setAttribute("uname", client.getUserName());
 			
-			response.sendRedirect(request.getContextPath()+"/index.html");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 			//response.getWriter().print("1");
 		}else{
-			information="您输入的用户名或密码错误！";
-			request.setAttribute("information", information);
-			request.getRequestDispatcher("login.html").forward(request, response);
+			information="您输入的用户名或密码有误!";
+			request.setAttribute("information", information.getBytes());
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 			//response.getWriter().println("0");
+			//out.print("<script language=javascript>alert('"+ information + "');history.go(-1);</script>");
 		}
 	}
 

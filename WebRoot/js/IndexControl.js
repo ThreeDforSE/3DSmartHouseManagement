@@ -51,14 +51,14 @@
 			var sp=document.getElementById('sp_control');
 			var btn=document.getElementById('btn_control');
 			if(flag==0){
-				hl.style.visibility="hidden";
-				sl.style.visibility="visible";
-				btn.style.left ="230px";
+				hl.style.display="none";
+				sl.style.display="inline";
+				btn.style.left ="225px";
 				sp.setAttribute("class","glyphicon glyphicon-chevron-left");
 				flag=1;
 			}else{
-				hl.style.visibility="visible";
-				sl.style.visibility="hidden";
+				hl.style.display="inline";
+				sl.style.display="none";
 				btn.style.left ="25px"; 
 				sp.setAttribute("class","glyphicon glyphicon-chevron-right");				
 				flag=0;
@@ -66,7 +66,8 @@
 		}
 
 
-	//创建div
+	//创建产品列表模块
+	//url 按钮指向,id 模块名,img_src 图片地址,name 产品名,model 产品型号,state 产品状态（判断坐标是否有数据即可）
 	function createProductDiv(url,id,img_src,name,model,state){
 	 var oriDiv=document.getElementById("product_list_group");
 	 var newA=document.createElement("a");
@@ -112,3 +113,16 @@
 	function removeDiv(father_ele_name,element_name){
 	 document.getElementById(father_ele_name).removeChild(document.getElementById(element_name));
 	}
+
+	//关闭弹窗
+	function dismiss(){
+		document.getElementById("tb_detailInfo").style.display="none";
+	}
+	//打开弹窗
+	function showInfo(name){
+		document.getElementById("tb_detailInfo").style.display="inline";
+	}
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})

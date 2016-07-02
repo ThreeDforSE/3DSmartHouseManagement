@@ -18,6 +18,8 @@ public class UserInfoServlet extends HttpServlet {
 	private int method;
 	private Client client=null;
 	String code;
+	String information="";
+	
 	//String uname;
 	/**
 	 * Constructor of the object.
@@ -62,6 +64,8 @@ public class UserInfoServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		method=Integer.parseInt(request.getParameter("method"));
 		if(method==1){
 			this.findPwd1(request, response);
@@ -82,7 +86,7 @@ public class UserInfoServlet extends HttpServlet {
 	 */
 	private void findPwd1(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
-	
+		
 		UserDao userDao = new UserDao();
 		String uname=request.getParameter("uname");
 		client = userDao.queryUser(uname);
@@ -93,7 +97,7 @@ public class UserInfoServlet extends HttpServlet {
 			request.setAttribute("information", "您输入的用户不存在！");
 			
 		}
-		request.getRequestDispatcher("login.html").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 	
 	/*
@@ -105,8 +109,14 @@ public class UserInfoServlet extends HttpServlet {
 		code=SendMsgUtil.createRandomVcode();
 		String jresult=SendMsgUtil.sendMsg(uname, code);
 		//String recode= request.getParameter("verify_code");
+		if(null!=jresult){
+			//response.getWriter().println(jresult);
+			request.getSession().setAttribute("vcode", code);
+		}
 	}
 	
+	
+
 	/*
 	 * 提交忘记密码表单
 	 * 
@@ -123,11 +133,18 @@ public class UserInfoServlet extends HttpServlet {
 			String new_password=request.getParameter("new_password");
 			client.setPassword(new_password);
 			int ret=userDao.updatePwd(client);
-			response.getWriter().print(ret);
+			if(ret>0){
+				request.setAttribute("information", "密码修改成功!");
+				
+			}
+			else{
+				request.setAttribute("information", "密码修改失败!请稍后重试!");
+			}
+			//response.getWriter().print(ret);
 		}else{
 			request.setAttribute("information", "您输入的验证码不正确！");
 		}
-		request.getRequestDispatcher("login.html").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 	
 	/*
@@ -157,11 +174,19 @@ public class UserInfoServlet extends HttpServlet {
 		}
 		if(ret>0){
 			
-			response.getWriter().print("1");
-			response.sendRedirect(request.getContextPath()+"/login.html");
+			information="账户信息修改成功!";
+			request.setAttribute("information", information);
+			//response.getWriter().print("1");
+			//response.sendRedirect(request.getContextPath()+"/login.jsp");
+			request.getRequestDispatcher("redirectPage.jsp").forward(request, response);
 		}else{
-			response.getWriter().print("0");
+			//response.getWriter().print("0");
+			information="账户信息修改失败，请重新操作!";
+			request.setAttribute("information", information);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
+		
+		
 	}
 
 	/**
