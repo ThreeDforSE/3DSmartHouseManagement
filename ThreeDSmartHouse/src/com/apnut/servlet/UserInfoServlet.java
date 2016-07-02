@@ -88,12 +88,11 @@ public class UserInfoServlet extends HttpServlet {
 		client = userDao.queryUser(uname);
 		if(null != client){
 			request.setAttribute("client", client);
-			
 		}else{
 			request.setAttribute("information", "您输入的用户不存在！");
 			
 		}
-		request.getRequestDispatcher("login.html").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 	
 	/*
@@ -127,7 +126,7 @@ public class UserInfoServlet extends HttpServlet {
 		}else{
 			request.setAttribute("information", "您输入的验证码不正确！");
 		}
-		request.getRequestDispatcher("login.html").forward(request, response);
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 	
 	/*
