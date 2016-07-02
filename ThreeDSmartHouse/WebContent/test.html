@@ -16,48 +16,6 @@
 		<script type="application/x-javascript"> 
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 		
-		function doLogin(){
-			$("#loginFrm").form({
-				url:'LoginServlet',
-				success:function(data){
-					if(data=='1'){
-						window.location.href='index.html';
-					}
-					else{
-						$.messager.alert('提示','用户名或密码错误！');
-					}
-				}
-			});
-			$("#loginFrm").submit();
-		}
-		//文档加载之后执行
-		$(function(){
-			$("#loginDialog").dialog({
-				//设置dialog的属性
-				title:'有家超市经营助手',
-				buttons:[
-					{text:'登录',handler:function(){
-						//执行表单提交
-						doLogin();
-						}},
-					{text:'注册'}
-				]
-				
-				});
-		});
-		</script>
-
-		<style>
-			body{
-				margin: 0;
-				overflow: hidden;
-        background-color: transparent;
-			}
-
-			#ex1Slider .slider-selection {
-   			background: #BABABA;
-  		}
-
 		</style>
 </head>
 

@@ -1,9 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB2312"%>  
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>  
   
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">  
 <html>  
     <head>
-	<title>µÇÂ¼-ApNutÖÇÄÜ¼Ò¾Ó¹ÜÀíÏµÍ³ v1.0</title>
+	<title>ç™»å½•-ApNutæ™ºèƒ½å®¶å±…ç®¡ç†ç³»ç»Ÿ v1.0</title>
 		<meta charset="utf-8">
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -30,20 +30,20 @@
 	 <!-----start-main---->
 	 <div class="main">
 		<div class="login-form">
-			<h1 class="fontC">ApNutÖÇÄÜ¼Ò¾Ó¹ÜÀíÏµÍ³</h1>
-			<h3 class="fontC">ÓÃ»§µÇÂ¼</h3>
+			<h1 class="fontC">ApNutæ™ºèƒ½å®¶å±…ç®¡ç†ç³»ç»Ÿ</h1>
+			<h3 class="fontC">ç”¨æˆ·ç™»å½•</h3>
 			
 					<div class="head">
 						<img src="images/lg.png" alt=""/>
 					</div>
 			<form id="loginFrm" method="post" action="LoginServlet" >
-				<input type="textC" name="uname" id="uname" class="text fontC" value="ÇëÊäÈë×¢²áÊÖ»úºÅ"  oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÊäÈë×¢²áÊÖ»úºÅ';this.color=#E8E8E8;}" >
+				<input type="textC" name="uname" id="uname" class="text fontC" value="è¯·è¾“å…¥æ³¨å†Œæ‰‹æœºå·"  oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'è¯·è¾“å…¥æ³¨å†Œæ‰‹æœºå·';this.color=#E8E8E8;}" >
 				<input type="passwordC" class="fontC" name="password" id="pwd" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
-				<p>µÇÂ¼Ê§°Ü£º${requestScope.information}</p>
+				<p>ç™»å½•å¤±è´¥ï¼š${requestScope.information}</p>
 				<div class="submit">
-					<input type="submit" class="fontC" onclick="doLogin();return false;" value="µÇÂ¼" >
+					<input type="submit" class="fontC" onclick="doLogin();return false;" value="ç™»å½•" >
 				</div>	
-				<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal" class="fontC">Íü¼ÇÃÜÂë£¿</a></p>
+				<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal" class="fontC">å¿˜è®°å¯†ç ï¼Ÿ</a></p>
 				</form>
 		</div>
 			<!--//End-login-form-->
@@ -58,13 +58,13 @@
 			 <!-----//end-main---->
 
 
-			 <!-----//Íü¼ÇÃÜÂëµ¯¿ò---->
+			 <!-----//å¿˜è®°å¯†ç å¼¹æ¡†---->
 	<div class="modal fade bs-example-modal-sm" id="RetrieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-headerC fontC">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title fontC" id="exampleModalLabel">Íü¼ÇÃÜÂë</h4>
+	        <h4 class="modal-title fontC" id="exampleModalLabel">å¿˜è®°å¯†ç </h4>
 	      </div>
 	      <div class="modal-body">
 
@@ -73,34 +73,34 @@
 			            <div class="col-md-10 col-md-offset-1">
 			                <form id="frmForgetPwd" method="post" class="form-horizontal" >
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label fontC">ÊÖ»úºÅ</label>
+			                        <label class="col-md-3 control-label fontC">æ‰‹æœºå·</label>
 
 			                        <div class="col-md-8">
-			                            <input type="text" class="form-control input-lg fontC" name="uname" value="ÇëÌîĞ´ÊÖ»úºÅ" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÌîĞ´ÊÖ»úºÅ';}">
+			                            <input type="text" class="form-control input-lg fontC" name="uname" value="è¯·å¡«å†™æ‰‹æœºå·" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'è¯·å¡«å†™æ‰‹æœºå·';}">
 			                        </div>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label fontC">ÑéÖ¤Âë</label>
+			                        <label class="col-md-3 control-label fontC">éªŒè¯ç </label>
 			                        <div class="col-md-4">
-			                            <input type="text" class="form-control input-lg fontC" name="verify_code" value="ÑéÖ¤Âë" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÑéÖ¤Âë';}"/>
+			                            <input type="text" class="form-control input-lg fontC" name="verify_code" value="éªŒè¯ç " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'éªŒè¯ç ';}"/>
 			                        </div>
-			                        <button type="button" class="btn btn-danger btn-lg col-md-3 fontC">·¢ËÍÑéÖ¤Âë</button>
+			                        <button type="button" class="btn btn-danger btn-lg col-md-3 fontC">å‘é€éªŒè¯ç </button>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label fontC">ĞÂÃÜÂë</label>
+			                        <label class="col-md-3 control-label fontC">æ–°å¯†ç </label>
 			                        <div class="col-md-8">
-			                            <input type="password" class="form-control input-lg fontC" name="new_password" value="ÇëÌîĞ´ĞÂÃÜÂë" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÌîĞ´ĞÂÃÜÂë';}"/>
-			                            <span class="help-block fontC">ÇëÊäÈëÄúµÄĞÂÃÜÂë¡£</span>
+			                            <input type="password" class="form-control input-lg fontC" name="new_password" value="è¯·å¡«å†™æ–°å¯†ç " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'è¯·å¡«å†™æ–°å¯†ç ';}"/>
+			                            <span class="help-block fontC">è¯·è¾“å…¥æ‚¨çš„æ–°å¯†ç ã€‚</span>
 			                        </div>
 			                    </div>
 
 			                    <div class="form-group">
-			                        <label class="col-md-3 control-label fontC">È·ÈÏÃÜÂë</label>
+			                        <label class="col-md-3 control-label fontC">ç¡®è®¤å¯†ç </label>
 			                        <div class="col-md-8">
-			                            <input type="password" class="form-control input-lg fontC" name="confirm_password" value="ÇëÈ·ÈÏÃÜÂë" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÈ·ÈÏÃÜÂë';}"/>
-			                            <span class="help-block fontC">ÇëÔÙ´ÎÊäÈëÄúµÄĞÂÃÜÂë¡£</span>
+			                            <input type="password" class="form-control input-lg fontC" name="confirm_password" value="è¯·ç¡®è®¤å¯†ç " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'è¯·ç¡®è®¤å¯†ç ';}"/>
+			                            <span class="help-block fontC">è¯·å†æ¬¡è¾“å…¥æ‚¨çš„æ–°å¯†ç ã€‚</span>
 			                        </div>
 			                    </div>
 			                    <div class="form-group">
@@ -115,14 +115,14 @@
 	      </div>
 
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default fontC" data-dismiss="modal">¹Ø±Õ</button>
-	        <button type="submit" class="btn btn-danger fontC">Ìá½»</button>
+	        <button type="button" class="btn btn-default fontC" data-dismiss="modal">å…³é—­</button>
+	        <button type="submit" class="btn btn-danger fontC">æäº¤</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
-	<!-----//end of Íü¼ÇÃÜÂëµ¯³ö¿ò---->
+	<!-----//end of å¿˜è®°å¯†ç å¼¹å‡ºæ¡†---->
 
 <script type="text/javascript">
 
@@ -191,13 +191,13 @@
 });
 
   //   function doCheckInfo(){
-		// 	//document.getElementById("ÎÄ±¾¿òÃû").value
+		// 	//document.getElementById("æ–‡æœ¬æ¡†å").value
 		// 	var oName=document.getElementById("uname");
 		// 	var nPwd=document.getElementById("pwd");
-		// 	//if((document.loginFrm.uname.value==''or document.loginFrm.uname.value=='ÇëÊäÈë×¢²áÊÖ»úºÅ')&&(document.loginFrm.password.value==''or document.loginFrm.password.value=='******'))
-		// 	if((oName.value==''or oName.value=='ÇëÊäÈë×¢²áÊÖ»úºÅ')&&(nPwd.value==''or nPwd.value=='******'))
+		// 	//if((document.loginFrm.uname.value==''or document.loginFrm.uname.value=='è¯·è¾“å…¥æ³¨å†Œæ‰‹æœºå·')&&(document.loginFrm.password.value==''or document.loginFrm.password.value=='******'))
+		// 	if((oName.value==''or oName.value=='è¯·è¾“å…¥æ³¨å†Œæ‰‹æœºå·')&&(nPwd.value==''or nPwd.value=='******'))
 		// 	{
-		// 		alert('ÌáÊ¾','ÓÃ»§Ãû»òÃÜÂë²»¿ÉÎª¿Õ£¡');
+		// 		alert('æç¤º','ç”¨æˆ·åæˆ–å¯†ç ä¸å¯ä¸ºç©ºï¼');
 		// 	}
 		// };
 //	$('#exampleModal').on('show.bs.modal', function (event) {

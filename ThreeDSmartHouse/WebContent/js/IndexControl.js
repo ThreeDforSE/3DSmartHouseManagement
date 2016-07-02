@@ -68,7 +68,7 @@
 
 	//创建产品列表模块
 	//url 按钮指向,id 模块名,img_src 图片地址,name 产品名,model 产品型号,state 产品状态（判断坐标是否有数据即可）
-	function createProductDiv(url,id,img_src,name,model,state){
+	function createProductDiv(url,img_src,name,model,state){
 	 var oriDiv=document.getElementById("product_list_group");
 	 var newA=document.createElement("a");
 	 var newImg=document.createElement("img");
@@ -78,10 +78,12 @@
 	 var newP2=document.createElement("p");
 	 var newSpan=document.createElement("span");
 	 //添加<a>
-	 newA.setAttribute("href",url);
+	 newA.setAttribute("href",url); 
 	 // newA.setAttribute("href","http://121.42.33.120");
 	 newA.setAttribute("class","list-group-itemC fontC row");
-	 newA.setAttribute("id",id);
+	 newA.setAttribute("id",model); //项id为型号
+	 newA.setAttribute("onclick","showInfo(this)");
+	 newA.setAttribute("action","MyProductListServlet");
 	 // newA.setAttribute("id","refrig_1");
 	 document.getElementById("product_list_group").appendChild(newA);
 	 //添加<img>
@@ -119,7 +121,7 @@
 		document.getElementById("tb_detailInfo").style.display="none";
 	}
 	//打开弹窗
-	function showInfo(name){
+	function showInfo(obj){
 		document.getElementById("tb_detailInfo").style.display="inline";
 	}
 
