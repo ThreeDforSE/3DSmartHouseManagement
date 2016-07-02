@@ -204,12 +204,12 @@
 			<div class="container-fluid">
 			        <div class="row">
 			            <div class="col-md-10 col-md-offset-1">
-			                <form id="signupForm" method="post" class="form-horizontal" action="target.php">
+			                <form id="signupForm" method="post" class="form-horizontal">
 			                    <div class="form-group">
 			                        <label class="col-md-3 control-label fontC">¸ü»»ÊÖ»úºÅ</label>
 
 			                        <div class="col-md-8">
-			                            <input type="text" id="phone_num" class="form-control input-lg fontC" name="phone_num" value="ÇëÌîÐ´ÊÖ»úºÅ" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÌîÐ´ÊÖ»úºÅ';}">
+			                            <input type="text" id="phone_num" class="form-control input-lg fontC" name="uname" value="ÇëÌîÐ´ÊÖ»úºÅ" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ÇëÌîÐ´ÊÖ»úºÅ';}">
 			                        </div>
 			                    </div>
 
