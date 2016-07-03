@@ -39,7 +39,10 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("uid");
 		session.removeAttribute("uname");
-		response.sendRedirect(request.getContextPath()+"/redirectPage.jsp");
+//		response.sendRedirect(request.getContextPath()+"/redirectPage.jsp");
+		String information="您已退出登录！";
+		request.setAttribute("information", information);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
