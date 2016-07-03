@@ -37,7 +37,7 @@
 	<%  
   		if(session.getAttribute("uid")==null)
   		{%>
-  		<div class="alert alert-danger" role="alert">
+  		<div class="alert alert-danger" role="alert" align="center" style="width:70%;top:5%;left:15%;position:absolute;">
   			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   			<span class="sr-only">Error:</span>
   			您当前没有登录！3秒后将跳转到登录页面……<a href="login.jsp" class="alert-link">如果没有跳转，请点击此处立即跳转。</a>

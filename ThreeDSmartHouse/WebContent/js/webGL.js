@@ -34,8 +34,7 @@
         var tv = initTv(scene);
         createPlant(scene,0,2,-60); //电视左
         createPlant(scene,40,2,-60);//电视右
-        initChair(scene);
-        setref(scene);
+        initChair(scene); 
         setCamera(camera,scene);
         initAmbientLight(scene);
 
@@ -293,21 +292,6 @@
             mesh.scale.y = 7;
             mesh.scale.z = 7;            
             mesh.position.x=40;
-            mesh.position.y=0;
-            mesh.position.z=20;
-            scene.add(mesh);
-        }, './images/');
-    }
-    
-    function setref(scene){
-    	var mesh;
-        var loader = new THREE.JSONLoader();
-        loader.load('refrige.js', function (geometry, mat) {
-            mesh = new THREE.Mesh(geometry, mat[0]);
-            mesh.scale.x = 0.1;
-            mesh.scale.y = 0.1;
-            mesh.scale.z = 0.1;            
-            mesh.position.x=20;
             mesh.position.y=0;
             mesh.position.z=20;
             scene.add(mesh);

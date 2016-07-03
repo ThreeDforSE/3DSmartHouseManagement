@@ -17,7 +17,7 @@
 	 <div class="alert alert-success fontC" role="alert">
 	 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
   	 <span class="sr-only">Success:</span>
-	  您已退出登录，3s后将会回到登录界面。<a href="login.jsp" class="alert-link">点击此处马上跳转……</a>
+  	 	${requestScope.information} 3s后将会回到登录界面。<a href="login.jsp" class="alert-link">点击此处马上跳转……</a>
 	</div>  
 	</div>
    <%

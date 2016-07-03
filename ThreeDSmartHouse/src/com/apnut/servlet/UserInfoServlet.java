@@ -14,11 +14,14 @@ import com.apnut.dao.UserDao;
 import com.apnut.entity.Client;
 import com.apnut.util.SendMsgUtil;
 
+import net.sf.json.JSONObject;
+
 public class UserInfoServlet extends HttpServlet {
 	private int method;
 	private Client client=null;
 	String code;
 	String information="";
+
 	
 	//String uname;
 	/**
@@ -79,46 +82,59 @@ public class UserInfoServlet extends HttpServlet {
 		if(method==4){
 			this.updateInfo(request, response);
 		}
+		if(method==5){
+			this.testInfo(request, response);
+		}
+		if(method==6){
+			this.validateCode(request, response);
+		}
 	}
 	/*
-	 * 忘记密码1-》2-》3
+	 * 忘记密码1-》2-》6》3
 	 * 输入用户名时检查是否存在
 	 */
 	private void findPwd1(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
-		
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("application/json; charset=utf-8");
+//		String jsonStr = "{\"valid\":\"true\"}";
+		JSONObject json = new JSONObject();
 		UserDao userDao = new UserDao();
-		String uname=request.getParameter("uname");
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String uname=request.getParameter("uname2");
 		client = userDao.queryUser(uname);
 		if(null != client){
-			request.setAttribute("client", client);
-			
+			json.put("valid",true);
 		}else{
-			request.setAttribute("information", "您输入的用户不存在！");
-			
+			response.setContentType("application/json");
+			json.put("valid",false);					
 		}
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		out.print(json);
+		System.out.println("用户名校验-请求用户"+uname+"验证结果："+json);
+//		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 	
 	/*
 	 * 点击发送验证码
 	 */
+	
 	private void sendMsg(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		String uname=request.getParameter("uname2");
 		System.out.println(uname);
 		code=SendMsgUtil.createRandomVcode();
-		String jresult=SendMsgUtil.sendMsg(uname, code);
+//		String jresult=SendMsgUtil.sendMsg(uname, code);
 		//String recode= request.getParameter("verify_code");
-		if(null!=jresult){
+//		if(null!=jresult){
 			//response.getWriter().println(jresult);
 			request.getSession().setAttribute("vcode", code);
+			PrintWriter out = response.getWriter();  
+			 out.print(code);
 			System.out.println(code);
-		}
+//		}
 	}
 	
-	
-
 	/*
 	 * 提交忘记密码表单
 	 * 
@@ -126,27 +142,19 @@ public class UserInfoServlet extends HttpServlet {
 	private void findPwd2(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		UserDao userDao = new UserDao();
-		String uname=request.getParameter("uname");
+		String uname=request.getParameter("uname2");
 		client = userDao.queryUser(uname);
-//		String code=SendMsgUtil.createRandomVcode();
-//		String jresult=SendMsgUtil.sendMsg(uname, code);
-		String verify_code= request.getParameter("verify_code");
-		if(verify_code.equals(code)){
-			String new_password=request.getParameter("new_password");
-			client.setPassword(new_password);
-			int ret=userDao.updatePwd(client);
-			if(ret>0){
-				request.setAttribute("information", "密码修改成功!");
-				
-			}
-			else{
-				request.setAttribute("information", "密码修改失败!请稍后重试!");
-			}
-			//response.getWriter().print(ret);
-		}else{
-			request.setAttribute("information", "您输入的验证码不正确！");
+		String new_password=request.getParameter("new_password");
+		client.setPassword(new_password);
+		int ret=userDao.updatePwd(client);
+		if(ret>0){
+			request.setAttribute("information", "密码修改成功!");
 		}
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		else{
+			request.setAttribute("information", "密码修改失败!请稍后重试!");
+		}
+			//response.getWriter().print(ret);
+		request.getRequestDispatcher("redirectPage.jsp").forward(request, response);
 	}
 	
 	/*
@@ -161,21 +169,16 @@ public class UserInfoServlet extends HttpServlet {
 		String oldName=(String) session.getAttribute("uname");
 		int uid=(int) session.getAttribute("uid");
 		String uname=request.getParameter("uname");
-		String verify_code=request.getParameter("verify_code");
 		String new_password=request.getParameter("new_password");
 		String confirm_password=request.getParameter("confirm_password");
 		
-		if(null!=uname&&null!=verify_code){
-			if(verify_code.equals(code)){
-				
-				 ret=userDao.updateUname(oldName,uname);
-			}
+		if(null!=uname){		
+			 ret=userDao.updateUname(oldName,uname);
 		}
 		if(null!=new_password&&null!=confirm_password){
 			ret=userDao.updatePwd(uid, new_password);
 		}
-		if(ret>0){
-			
+		if(ret>0){			
 			information="账户信息修改成功!";
 			request.setAttribute("information", information);
 			//response.getWriter().print("1");
@@ -185,10 +188,44 @@ public class UserInfoServlet extends HttpServlet {
 			//response.getWriter().print("0");
 			information="账户信息修改失败，请重新操作!";
 			request.setAttribute("information", information);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("redirectPage.jsp").forward(request, response);
+		}		
+	}
+	
+	/*
+	 * 测试方法
+	 */
+	private void testInfo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		String uname=request.getParameter("username");
+		System.out.println(uname);
+			PrintWriter out = response.getWriter();  
+			request.getSession().setAttribute("ifor", uname);
+			 out.print("welcome: "+uname);
+			System.out.println("welcome: "+uname);
+	}
+	
+	/*
+	 * 验证用户输入验证码
+	 */
+	private void validateCode(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("application/json; charset=utf-8");
+//		String jsonStr = "{\"valid\":\"true\"}";
+		JSONObject json = new JSONObject();
+		UserDao userDao = new UserDao();
+		String vcode=request.getParameter("verify_code");
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(vcode.equals(code)){
+			json.put("valid",true);
+		}else{
+			response.setContentType("application/json");
+			json.put("valid",false);					
 		}
-		
-		
+		out.print(json);
+		System.out.println("验证码校验-用户输入"+vcode+"验证结果："+json);
 	}
 
 	/**

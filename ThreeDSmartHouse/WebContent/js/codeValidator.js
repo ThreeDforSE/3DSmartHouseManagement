@@ -99,3 +99,81 @@ function settime(obj) {
     } 
     setTimeout(function() { settime(obj) },1000) //每1000毫秒执行一次
 } 
+
+//<p id="hid_txt" style="display:hidden"></p>
+    $(document).ready(function() {
+    $('#frmForgetPwd').bootstrapValidator({
+        message: '请填写完整信息',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            uname2: {
+                validators: {
+                    notEmpty: {
+                        message: '手机号不可为空'
+                    },
+                    remote: {
+                        url: 'UserInfoServlet?method=1',
+                        message: '用户名不存在'
+                    },
+                    regexp: {
+                        regexp: /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/,
+                        message: '这不是一个手机号'
+                    }
+                }
+            },
+            verify_code: {
+                validators: {
+                    notEmpty: {
+                        message: '验证码不可为空'
+                    },
+                    remote: {
+                        url: 'UserInfoServlet?method=6',
+                        message: '验证码错误'
+                    },
+                    numeric: {
+                      message: '只可输入数字'
+                    }
+                }
+            },
+            new_password: {
+                enabled: false,
+                validators: {
+                    notEmpty: {
+                        message: '密码不可为空'
+                    },
+                    identical: {
+                        field: 'confirm_password',
+                        message: '密码不一致'
+                    }
+                }
+            },
+            confirm_password: {
+                enabled: false,
+                validators: {
+                    notEmpty: {
+                        message: '密码不可为空'
+                    },
+                    identical: {
+                        field: 'new_password',
+                        message: '密码不一致'
+                    }
+                }
+            }
+        }
+    });
+
+    // Enable the password/confirm password validators if the password is not empty
+    $('#frmForgetPwd').find('[name="new_password"]').on('keyup', function() {
+        var isEmpty = $(this).val() == '';
+        $('#frmForgetPwd').bootstrapValidator('enableFieldValidators', 'new_password', !isEmpty)
+                        .bootstrapValidator('enableFieldValidators', 'confirm_password', !isEmpty);
+        if ($(this).val().length == 1) {
+            $('#frmForgetPwd').bootstrapValidator('validateField', 'new_password')
+                            .bootstrapValidator('validateField', 'confirm_password');
+        }
+    });
+});
