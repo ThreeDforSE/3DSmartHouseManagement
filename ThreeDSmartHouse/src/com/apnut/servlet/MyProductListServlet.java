@@ -79,7 +79,7 @@ public class MyProductListServlet extends HttpServlet {
 		JSONArray json=JSONArray.fromObject(productsList);
 		String jsonStr=json.toString();
 		System.out.println(jsonStr);
-		response.getWriter().println(jsonStr);
+		response.getWriter().print(jsonStr);
 	}
 
 	/**

@@ -1,101 +1,141 @@
-    function init() {
-       	var count=0;
-        var clock = new THREE.Clock();
-
-        // 创建场景
-        var scene = new THREE.Scene();
-
-        // 创建摄像机
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-
-        var webGLRenderer = new THREE.WebGLRenderer();
-        webGLRenderer.setClearColor(new THREE.Color(0x000, 1.0));
-        webGLRenderer.setSize(window.innerWidth, window.innerHeight);
-        webGLRenderer.shadowMapEnabled = true;
-
-        //将摄像机与轨迹球绑定
-        var trackballControls = new THREE.TrackballControls(camera);
-
-        trackballControls.rotateSpeed = 1.0;
-        trackballControls.zoomSpeed = 1.0;
-        trackballControls.panSpeed = 1.0;
-        trackballControls.staticMoving = true;
-
-        var projector = new THREE.Projector();
-        document.getElementById("WebGL-output").addEventListener('mousedown', onDocumentMouseDown, false);//鼠标点击事件
-        
-        initPlane(scene);
-        initGrid(scene); //坐标网格
-        initWall_back(scene);
-        initWall_left(scene);
-        var tvtable = initTable(scene);
-        var refrig = initRefrige(scene); 
-        var tv = initTv(scene);
-        createPlant(scene,0,2,-60); //电视左
-        createPlant(scene,40,2,-60);//电视右
-        initChair(scene); 
-        setCamera(camera,scene);
-        initAmbientLight(scene);
-
-        //方向光
-        var pointColor = "#fbf1de";
-        var directionalLight = new THREE.DirectionalLight(pointColor);
-        directionalLight.position.set(-40, 60, -10);
-        directionalLight.castShadow = true;
-        directionalLight.shadowCameraNear = 2;
-        directionalLight.shadowCameraFar = 200;
-        directionalLight.shadowCameraLeft = -50;
-        directionalLight.shadowCameraRight = 50;
-        directionalLight.shadowCameraTop = 50;
-        directionalLight.shadowCameraBottom = -50;
-        directionalLight.distance = 0;
-        directionalLight.intensity = 0.5;
-        directionalLight.shadowMapHeight = 1024;
-        directionalLight.shadowMapWidth = 1024;
-        scene.add(directionalLight);
-
-        // 点光源
-        // var spotLight = new THREE.SpotLight(0xffffff);
-        // spotLight.position.set(-40, 60,30);
-        // spotLight.intensity = 1;
-        // scene.add(spotLight);
-
-        // 输出到页面
-        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);      
-        render();
-
-        function render() {
-            var delta = clock.getDelta();
-            trackballControls.update(delta);
-            webGLRenderer.render(scene, camera);
-            requestAnimationFrame(render);
-        }
-        
-        function onDocumentMouseDown(event) {  //鼠标按下事件方法
-            var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-            vector = vector.unproject(camera);
-
-            var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
-            var intersects = raycaster.intersectObjects([refrig]);
-            if (intersects.length > 0) {
-                if(count==0){
-                    console.log(intersects[0]);
-                intersects[0].object.material.transparent = true;
-                intersects[0].object.material.opacity = 0.5;
-                forTest();
-                count=1;
-                }
-                else{
-                    console.log(intersects[0]);
-                intersects[0].object.material.transparent = false;
-                intersects[0].object.material.opacity = 1;
-                count=0;
-//                forTest2();
-                }                
-            }
-        }
-    }
+    var scene = new THREE.Scene();
+	function init() {
+		if(!(localStorage.getItem('scene'))){
+		        var json = (localStorage.getItem('scene'));
+		        console.log(json);
+		        var sceneLoader = new THREE.SceneLoader();
+		        sceneLoader.parse(JSON.parse(json), function (e) {
+		            scene = e.scene;
+		        }, '.');
+		}
+		else
+		{
+	       	var count=0;
+	        var clock = new THREE.Clock();
+	
+	        // 创建场景
+	        var scene = new THREE.Scene();
+	
+	        // 创建摄像机
+	        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+	
+	        var webGLRenderer = new THREE.WebGLRenderer();
+	        webGLRenderer.setClearColor(new THREE.Color(0x000, 1.0));
+	        webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+	        webGLRenderer.shadowMapEnabled = true;
+	
+	        //将摄像机与轨迹球绑定
+	        var trackballControls = new THREE.TrackballControls(camera);
+	
+	        trackballControls.rotateSpeed = 1.0;
+	        trackballControls.zoomSpeed = 1.0;
+	        trackballControls.panSpeed = 1.0;
+	        trackballControls.staticMoving = true;
+	
+	        var projector = new THREE.Projector();
+	        document.getElementById("WebGL-output").addEventListener('mousedown', onDocumentMouseDown, false);//鼠标点击事件
+	        
+	        initPlane(scene);
+	        initGrid(scene); //坐标网格
+	        initWall_back(scene);
+	        initWall_left(scene);
+	        var tvtable = initTable(scene);
+	        var refrige = initRefrige(scene); 
+	        var tv = initTv(scene);
+	        createPlant(scene,0,2,-60); //电视左
+	        createPlant(scene,40,2,-60);//电视右
+	        initChair(scene); 
+	        setCamera(camera,scene);
+	        initAmbientLight(scene);
+	
+	        //方向光
+	        var pointColor = "#fbf1de";
+	        var directionalLight = new THREE.DirectionalLight(pointColor);
+	        directionalLight.position.set(-40, 60, -10);
+	        directionalLight.castShadow = true;
+	        directionalLight.shadowCameraNear = 2;
+	        directionalLight.shadowCameraFar = 200;
+	        directionalLight.shadowCameraLeft = -50;
+	        directionalLight.shadowCameraRight = 50;
+	        directionalLight.shadowCameraTop = 50;
+	        directionalLight.shadowCameraBottom = -50;
+	        directionalLight.distance = 0;
+	        directionalLight.intensity = 0.5;
+	        directionalLight.shadowMapHeight = 1024;
+	        directionalLight.shadowMapWidth = 1024;
+	        scene.add(directionalLight);
+	
+	        // 点光源
+	        // var spotLight = new THREE.SpotLight(0xffffff);
+	        // spotLight.position.set(-40, 60,30);
+	        // spotLight.intensity = 1;
+	        // scene.add(spotLight);
+	        
+	        var exporter = new THREE.SceneExporter();
+	        var sceneJson = JSON.stringify(exporter.parse(scene));
+	        localStorage.setItem('scene', sceneJson);
+	        console.log(sceneJson);
+	
+	        // 输出到页面
+	        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);   
+	//        var gui = addControls(refrige,tv);
+	        var controls = new function () {
+	            this.refrigePosX = refrige.position.x;
+	            this.refrigePosZ = refrige.position.z;
+	
+	            this.tvPosX = tv.position.x;
+	            this.tvPosZ = tv.position.z;
+	        };
+	        var gui = new dat.GUI();
+	        var guiRefrige = gui.addFolder("冰箱");
+	        guiRefrige.add(controls, "refrigePosX", -50, 50).onChange(function () {
+	            refrige.position.set(controls.refrigePosX, refrige.position.y, controls.refrigePosZ)
+	        });
+	        guiRefrige.add(controls, "refrigePosZ", -65, 65).onChange(function () {
+	            tvrefrige.position.set(controls.refrigePosX, refrige.position.y, controls.refrigePosZ)
+	        });
+	
+	        var guiTV = gui.addFolder("电视");
+	        guiTV.add(controls, "tvPosX", -50, 50).onChange(function () {
+	            tv.position.set(controls.tvPosX, tv.position.y, controls.tvPosZ)
+	        });
+	        guiTV.add(controls, "tvPosZ", -65, 65).onChange(function () {
+	            tv.position.set(controls.tvPosX, tv.position.y, controls.tvPosZ)
+	        });
+	        
+	        render();
+	
+	        function render() {
+	            var delta = clock.getDelta();
+	            trackballControls.update(delta);
+	            webGLRenderer.render(scene, camera);
+	            requestAnimationFrame(render);
+	        }
+	        
+	        function onDocumentMouseDown(event) {  //鼠标按下事件方法
+	            var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+	            vector = vector.unproject(camera);
+	
+	            var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+	            var intersects = raycaster.intersectObjects([refrige]);
+	            if (intersects.length > 0) {
+	                if(count==0){
+	                    console.log(intersects[0]);
+	                intersects[0].object.material.transparent = true;
+	                intersects[0].object.material.opacity = 0.5;
+	                forTest2();
+	                count=1;
+	                }
+	                else{
+	                    console.log(intersects[0]);
+	                intersects[0].object.material.transparent = false;
+	                intersects[0].object.material.opacity = 1;
+	                count=0;
+	                }                
+	            }
+	        }
+		} 
+}
   
      function initGrid(scene){
     	 //网格线
@@ -348,22 +388,76 @@
         var mesh = new THREE.Mesh(geom, wireFrameMat);
         return mesh;
     }
-        // var btn=document.createElement("button");
-        // btn.setAttribute("type","button");
-        // btn.setAttribute("class","btn btn-default");
-        // btn.setAttribute("data-container","body");
-        // btn.setAttribute("data-toggle","popover");
-        // btn.setAttribute("data-placement","right");
-        // btn.setAttribute("data-content","for test");
-        // btn.setAttribute("id","ex")
-        // btn.innerHTML="test";
-        // btn.style.position="absolute";
-        // btn.style.zindex="200";
-        // btn.style.top="90px";
-        // btn.style.left="90px";
-        // document.body.appendChild(btn);
 
     function forTest2(){
-        document.getElementById("infoDiv").style.display="none";
+        document.getElementById("infoDiv").style.display="inline";
     }
+    function addControls(refrige,tv){
+        var controls = new function () {
+            this.refrigePosX = refrige.position.x;
+            this.refrigePosZ = refrige.position.z;
+
+            this.tvPosX = tv.position.x;
+            this.tvPosZ = tv.position.z;
+        };
+        var gui = new dat.GUI();
+        var guiRefrige = gui.addFolder("冰箱");
+        guiRefrige.add(controls, "refrigePosX", -50, 50).onChange(function () {
+            refrige.position.set(controls.refrigePosX, refrige.position.y, controls.refrigePosZ)
+        });
+        guiRefrige.add(controls, "refrigePosZ", -65, 65).onChange(function () {
+            tvrefrige.position.set(controls.refrigePosX, refrige.position.y, controls.refrigePosZ)
+        });
+
+        var guiTV = gui.addFolder("电视");
+        guiTV.add(controls, "tvPosX", -50, 50).onChange(function () {
+            tv.position.set(controls.tvPosX, tv.position.y, controls.tvPosZ)
+        });
+        guiTV.add(controls, "tvPosZ", -65, 65).onChange(function () {
+            tv.position.set(controls.tvPosX, tv.position.y, controls.tvPosZ)
+        });
+//        controls.domElement.style.position = 'absolute';
+//        controls.domElement.style.zindex = '300';
+//        controls.domElement.style.right = '20px';
+//        controls.domElement.style.top = '60px';
+        return gui;
+    }
+    
+    
+    function exportSecene(scene) {
+        var exporter = new THREE.SceneExporter();
+        var sceneJson = JSON.stringify(exporter.parse(scene));
+        localStorage.setItem('scene', sceneJson);
+        console.log(sceneJson);
+    }
+
+    function importScene(scene) {
+        var json = (localStorage.getItem('scene'));
+        var sceneLoader = new THREE.SceneLoader();
+
+        sceneLoader.parse(JSON.parse(json), function (e) {
+            scene = e.scene;
+        }, '.');
+    }
+    
+	function editMode(){
+		var aEdit=document.getElementById('edit');
+		var editSave=document.getElementById('editSave');
+		var editCancel=document.getElementById('editCancel');
+		var title=document.getElementById('modeTitle');
+		if (title.innerHTML=="浏览模式") {
+			editSave.style.display="inline";
+			editCancel.style.display="inline";
+			title.innerHTML="编辑模式";
+//			exportSecene(scene);
+			flagEdit=1;
+		}
+		else{
+			editSave.style.display="none";
+			editCancel.style.display="none";
+			title.innerHTML="浏览模式";
+			flagEdit=0;
+		}
+	}
+    
     window.onload = init;

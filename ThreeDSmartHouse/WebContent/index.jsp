@@ -11,7 +11,6 @@
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/three.js"></script>
-
 		<script type="text/javascript" src="js/SceneLoader.js"></script>
    		<script type="text/javascript" src="js/SceneExporter.js"></script>
     	<script type="text/javascript" src="js/dat.gui.js"></script>
@@ -20,6 +19,7 @@
     	<script type="text/javascript" src="js/ValidateCode.js"></script>
 	    <script type="text/javascript" src="js/TrackballControls.js"></script>
 	    <script type="text/javascript" src="js/ThreeBSP.js"></script>
+	    
 
 		<script type="application/x-javascript"> 
 			addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
@@ -87,7 +87,7 @@
 	</nav>
 
 		<!-- WebGL 3D模块 -->
-	<div id="WebGL-output" style="position:absolute;z-index:10;">
+	<div id="WebGL-output" style="position:absolute;z-index:1;">
 	</div>
 
 	<!-- 视图按钮组 -->
@@ -101,7 +101,7 @@
 	<!-- 保存按钮组 -->
 	<div class="row fontC save-button">
 		<div class="col-md-12 col-md-offset-3">
-			<button type="button" id="editSave" class="btnLine btn-orange active col-md-6 " onclick="editMode()" style="display: none;">保存</button>
+			<button type="button" id="editSave" class="btnLine btn-orange active col-md-6 " onclick="doPostBack()" style="display: none;">保存</button>
 			<button type="button" id="editCancel" class="btnLine btn-orange col-md-6 " onclick="editMode()" style="display: none;">取消</button>
 		</div>
 	</div>
@@ -110,6 +110,21 @@
 	<button type="button" class="btnLeft" id="btn_control" style="position: absolute; z-index:180;top: 40%;left: 25px;" onclick="showSideLsit()">
 		<span id="sp_control" class="glyphicon glyphicon-chevron-right" ></span>
 	</button>
+	
+	<script>
+	function doPostBack() {
+	    $.ajax({
+	        async : false,
+	        cache : false,
+	        type : 'POST',
+	        url : "MyProductListServlet",// 请求的action路径
+	        error : function() {// 请求失败处理函数
+	        },
+	        success : function(data) {
+	        	alert(data);
+	        }
+	    });
+	}</script>
 
 	<!-- 隐藏状态边栏 -->
 	<div id="hidden_list" class="box-vertical">
@@ -142,7 +157,7 @@
 		  			<div class="col-md-6">
 						<h5 class="list-group-item-heading">笔记本</h5>
 				    	<p class="list-group-item-textC">AP-01T</p>
-				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
+				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 00/ 01</p>
 					</div>
 		  		</a>
 
@@ -151,7 +166,7 @@
 		  			<div class="col-md-6">
 						<h5 class="list-group-item-heading">单开门冰箱</h5>
 				    	<p class="list-group-item-textC">AT-01L</p>
-				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 00/ 01</p>
+				    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
 					</div>
 		  		</a>
 		</div>
@@ -185,6 +200,23 @@
   </table>
 </div>
 
+<div id="infoDiv" class="panel panel-detailinfo fontC" style="position:absolute;zindex:1800;width:270px;top:100px;right:50px;">
+  <!-- Default panel contents -->
+  <div class="panel-body row">
+  <div  id="tvd" class="col-md-8">
+  	<h2 align="center" id="tv">平板电视   </h2>
+    <p align="center">AT-01L</p>
+  </div>
+   </div>
+  <table class="table">
+    <tr>      <td>产品型号</td>     <td>AT-01L</td>    </tr>
+    <tr>      <td>机体温度</td>     <td>74℃ 高温</td>    </tr>
+    <tr>      <td>音量调节</td>     <td>      <input id="ex2" data-slider-id='ex1Slider' type="range" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="14" style="width:120px;" />     </td>    </tr>
+    <tr>      <td>当前状态</td>     <td>开启</td>    </tr>
+  </table>
+<div><a href="#" align="center"><span class="glyphicon glyphicon-off"  aria-hidden="true" style="font-size:50px; color:#c66269;margin-top:20px;margin-left: 100px;  text-shadow: 0 0 5px #d98188; "></span> </a></div>
+</div>
+
 
 		<!-- 用户信息设置模块 -->
 	<div class="modal fade fontC" id="userSettingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -195,13 +227,11 @@
 	        <h4 class="modal-title" id="myModalLabel">账户设置</h4>
 	      </div>
 	      <div class="modal-body">
-
 	      	<div>
 	      		<p style="color:#B22222;">
 	      			*根据需要填写以下信息，无需修改的项目可不填。
 	      		</p>
 	      	</div>
-
 			<div class="container-fluid">
 			        <div class="row">
 			            <div class="col-md-10 col-md-offset-1">
@@ -259,8 +289,6 @@
 		</div>
 	</div>
 	 -->
-	 
-	 <script type="text/javascript">
-	 </script>
+
 </body>
 </html>
