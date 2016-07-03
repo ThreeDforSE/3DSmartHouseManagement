@@ -49,44 +49,48 @@ function sendCode(obj){
     var phonenum = $("#phone_num").val();
     var result = isPhoneNum();
     if(result){
-        doPostBack('${base}/login/getCode.htm',backFunc1,{"phone_num":phonenum});
-        addCookie("secondsremained",60,60);//添加cookie记录,有效时间60s
+    	
+//    	doPostBack(backFunc,phonenum);
+        doPostBack(backFunc,{"uname2":phonenum});
+    	addCookie("secondsremained",60,60);//添加cookie记录,有效时间60s
         settime(obj);//开始倒计时
+        
     }
 }
 //将手机利用ajax提交到后台的发短信接口
-function doPostBack(url,backFunc,queryParam) {
+function doPostBack(backFunc,queryParam) {
     $.ajax({
         async : false,
         cache : false,
         type : 'POST',
-        url : ,// 请求的action路径
+        url : "UserInfoServlet?method=2",// 请求的action路径
         data:queryParam,
         error : function() {// 请求失败处理函数
         },
         success : backFunc
     });
 }
-function backFunc1(data){
-    var d = $.parseJSON(data);
-    if(!d.success){
-        alert(d.msg);
-    }else{//返回验证码
-        alert("模拟验证码:"+d.msg);
-        $("#code").val(d.msg);
-    }
+function backFunc(data){
+	var d = document.getElementById("hid_txt").innerHTML;
+//    var d = $.parseJSON(data);
+//    if(d!=){
+        alert(d);
+//    }else{//返回验证码
+//        alert("模拟验证码:"+d.msg);
+//        $("#code").val(d.msg);
+//    }
 }
 //开始倒计时
 var countdown;
 function settime(obj) { 
     countdown=getCookieValue("secondsremained");
     if (countdown == 0) { 
-        obj.removeAttr("disabled");    
-        obj.val("获取验证码"); 
+        obj.removeAttribute("disabled");    
+        obj.innerHTML="获取验证码"; 
         return;
     } else { 
-        obj.attr("disabled", true); 
-        obj.val("重新发送(" + countdown + ")"); 
+        obj.setAttribute("disabled", true); 
+        obj.innerHTML="重新发送(" + countdown + ")"; 
         countdown--;
         editCookie("secondsremained",countdown,countdown+1);
     } 

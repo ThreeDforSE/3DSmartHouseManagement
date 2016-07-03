@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+		<script type="text/javascript" src="js/ValidateCode.js"></script>
 		<script type="application/x-javascript"> 
 
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
@@ -37,11 +38,11 @@
 						<img src="images/lg.png" alt=""/>
 					</div>
 			<form id="loginFrm" method="post" action="LoginServlet" >
-				<input type="textC" name="uname" id="uname" class="text fontC" value="请输入注册手机号"  oninput='check(this.value)' onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入注册手机号';this.color=#E8E8E8;}" >
+				<input type="textC" name="uname" id="uname" class="text fontC" value="请输入注册手机号"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入注册手机号';this.color=#E8E8E8;}" >
 				<input type="passwordC" class="fontC" name="password" id="pwd" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}">
-				<p>登录失败：${requestScope.information}</p>
+				<p style="color:#EE2C2C">${requestScope.information}</p>
 				<div class="submit">
-					<input type="submit" class="fontC" onclick="doLogin();return false;" value="登录" >
+					<input type="submit" class="fontC" value="登录" >
 				</div>	
 				<p><a href="#foo" data-toggle="modal" data-target="#RetrieveModal" class="fontC">忘记密码？</a></p>
 				</form>
@@ -71,12 +72,11 @@
 			<div class="container-fluid">
 			        <div class="row">
 			            <div class="col-md-10 col-md-offset-1">
-			                <form id="frmForgetPwd" method="post" class="form-horizontal" >
+			                <form id="frmForgetPwd" method="post" class="form-horizontal">
 			                    <div class="form-group">
 			                        <label class="col-md-3 control-label fontC">手机号</label>
-
 			                        <div class="col-md-8">
-			                            <input type="text" class="form-control input-lg fontC" name="uname" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
+			                            <input id="phone_num" type="text" class="form-control input-lg fontC" name="uname2" value="请填写手机号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请填写手机号';}">
 			                        </div>
 			                    </div>
 
@@ -85,8 +85,14 @@
 			                        <div class="col-md-4">
 			                            <input type="text" class="form-control input-lg fontC" name="verify_code" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
 			                        </div>
-			                        <button type="button" class="btn btn-danger btn-lg col-md-3 fontC">发送验证码</button>
+			                        <button type="button" class="btn btn-danger btn-lg col-md-3 fontC" onclick="sendCode(this)">发送验证码</button>
+			                        <p id="hid_txt" style="display:hidden" >${sessionScope.vcode}</p>
 			                    </div>
+			                    <script type="text/javascript">
+			                    function senMsg(){
+			                    	doPostBack(backFunc1,document.getElementById("uname").value);
+			                    }
+			                    </script>
 
 			                    <div class="form-group">
 			                        <label class="col-md-3 control-label fontC">新密码</label>
@@ -103,11 +109,7 @@
 			                            <span class="help-block fontC">请再次输入您的新密码。</span>
 			                        </div>
 			                    </div>
-			                    <div class="form-group">
-			                        <div class="col-lg-9 col-lg-offset-3">
-			                            <button type="submit" class="btn btn-primary">Submit</button>
-			                        </div>
-			                    </div>
+		
 			                </form>
 			            </div>
 			        </div>
@@ -116,7 +118,7 @@
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default fontC" data-dismiss="modal">关闭</button>
-	        <button type="submit" class="btn btn-danger fontC">提交</button>
+	        <button type="submit" class="btn btn-danger fontC" >提交</button>
 	      </div>
 	    </div>
 	  </div>

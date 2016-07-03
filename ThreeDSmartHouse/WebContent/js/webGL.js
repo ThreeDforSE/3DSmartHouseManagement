@@ -35,6 +35,7 @@
         createPlant(scene,0,2,-60); //电视左
         createPlant(scene,40,2,-60);//电视右
         initChair(scene);
+        setref(scene);
         setCamera(camera,scene);
         initAmbientLight(scene);
 
@@ -91,7 +92,7 @@
                 intersects[0].object.material.transparent = false;
                 intersects[0].object.material.opacity = 1;
                 count=0;
-                forTest2();
+//                forTest2();
                 }                
             }
         }
@@ -297,6 +298,21 @@
             scene.add(mesh);
         }, './images/');
     }
+    
+    function setref(scene){
+    	var mesh;
+        var loader = new THREE.JSONLoader();
+        loader.load('refrige.js', function (geometry, mat) {
+            mesh = new THREE.Mesh(geometry, mat[0]);
+            mesh.scale.x = 0.1;
+            mesh.scale.y = 0.1;
+            mesh.scale.z = 0.1;            
+            mesh.position.x=20;
+            mesh.position.y=0;
+            mesh.position.z=20;
+            scene.add(mesh);
+        }, './images/');
+    }
 
     function initAmbientLight(scene){
         var ambientLight = new THREE.AmbientLight(0x383838);
@@ -313,11 +329,11 @@
         // <div align="center" style="margin-left:0px; width:100%;height:100%;left:0px;top:90px;position:absolute;z-index:150;">
         //     <iframe src="sidemodel.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
         // </div>
-        var odiv=document.getElementById("infoDiv");
-        if(odiv){
-            odiv.style.display="inline";
-
-        }else{
+//        var odiv=document.getElementById("infoDiv");
+//        if(odiv){
+//            odiv.style.display="inline";
+//
+//        }else{
             var div=document.createElement("div");
         div.setAttribute("align","center");
         // div.style.width="100%";
@@ -330,13 +346,13 @@
         document.body.appendChild(div);
 
         var iframe=document.createElement("iframe");
-        iframe.setAttribute("src","test.html");
+        iframe.setAttribute("src","dynamicState.jsp");
         iframe.style.width="100%";
         iframe.style.height="100%";
         iframe.style.frameborder="0";
         iframe.style.scrolling="no";
         div.appendChild(iframe);
-        }
+//        }
     }
         
     function createMesh(geom) {
@@ -366,6 +382,4 @@
     function forTest2(){
         document.getElementById("infoDiv").style.display="none";
     }
-
-    $('#ex').popover('show');
     window.onload = init;

@@ -136,8 +136,7 @@
 			    	<p class="list-group-item-textC-sm small-font" align="center">已放置 01/ 01</p>
 					</div>
 		  		</a>
-				
-			
+
 				<a href="#" class="list-group-itemC fontC row">
 		  			<img src="images/pc1.png" class="col-md-6">
 		  			<div class="col-md-6">
