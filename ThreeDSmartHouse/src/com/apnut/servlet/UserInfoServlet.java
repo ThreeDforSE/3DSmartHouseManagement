@@ -80,7 +80,7 @@ public class UserInfoServlet extends HttpServlet {
 			this.findPwd2(request, response);
 		}
 		if(method==4){
-			this.updateInfo(request, response);
+			this.valiUser(request, response);
 		}
 		if(method==5){
 			this.testInfo(request, response);
@@ -226,6 +226,27 @@ public class UserInfoServlet extends HttpServlet {
 		}
 		out.print(json);
 		System.out.println("验证码校验-用户输入"+vcode+"验证结果："+json);
+	}
+	private void valiUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("application/json; charset=utf-8");
+//		String jsonStr = "{\"valid\":\"true\"}";
+		JSONObject json = new JSONObject();
+		UserDao userDao = new UserDao();
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String uname=request.getParameter("uname7");
+		client = userDao.queryUser(uname);
+		if(null != client){
+			json.put("valid",true);
+		}else{
+			response.setContentType("application/json");
+			json.put("valid",false);					
+		}
+		out.print(json);
+		System.out.println("用户名校验-请求用户"+uname+"验证结果："+json);
+//		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**

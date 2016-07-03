@@ -67,7 +67,8 @@ function doPostBack(backFunc,queryParam) {
         success : backFunc
     });
 }
-function backFunc(data){
+function backFunc() {// 请求失败处理函数
+//},(data){
 //	var d = document.getElementById("hid_txt");
 //    <p id="hid_txt" style="display:inline" >${sessionScope.vcode}</p>
 //		var newP=document.createElement("p");

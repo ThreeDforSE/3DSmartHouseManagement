@@ -1,31 +1,3 @@
-/*--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
---*/
-/* reset */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
-article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
-ol,ul{list-style:none;margin:0px;padding:0px;}
-blockquote,q{quotes:none;}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
-table{border-collapse:collapse;border-spacing:0;}
-/* start editing from here */
-a{text-decoration:none;}
-.txt-rt{text-align:right;}/* text align right */
-.txt-lt{text-align:left;}/* text align left */
-.txt-center{text-align:center;}/* text align center */
-.float-rt{float:right;}/* float right */
-.float-lt{float:left;}/* float left */
-.clear{clear:both;}/* clear float */
-.pos-relative{position:relative;}/* Position Relative */
-.pos-absolute{position:absolute;}/* Position Absolute */
-.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
-.vertical-top{	vertical-align:top;}/* vertical align top */
-nav.vertical ul li{	display:block;}/* vertical menu */
-nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
-img{max-width:100%;}
 /*end reset*/
 /****-----start-body----****/
 body,html{
@@ -34,6 +6,33 @@ body,html{
  	height: 100%;
  	margin:0px;
 	width: 100%;
+}
+
+.aC{
+	text-decoration: none;
+	color: #58524c;
+}
+
+.btnC {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 
 .btnLeft {
@@ -153,6 +152,73 @@ fieldset[disabled] .btn-grey.active {
 }
 
 
+.btn-login {
+  color: #f4dfce;
+  background-color: #F4A460;
+  border-color: #eaa366;
+}
+.btn-login:focus,
+.btn-login.focus {
+  color: #fff;
+  background-color: #f09a51;
+  border-color: #e8954f;
+}
+.btn-login:hover {
+  color: #fff;
+  background-color: #f09a51;
+  border-color: #e8954f;
+}
+.btn-login:active,
+.btn-login.active,
+.open > .dropdown-toggle.btn-grey {
+  color: #fff;
+  background-color: #f09a51;
+  border-color: #e8954f;
+}
+.btn-login:active:hover,
+.btn-login.active:hover,
+.open > .dropdown-toggle.btn-grey:hover,
+.btn-login:active:focus,
+.btn-login.active:focus,
+.open > .dropdown-toggle.btn-grey:focus,
+.btn-login:active.focus,
+.btn-login.active.focus,
+.open > .dropdown-toggle.btn-login.focus {
+  color: #fff;
+  background-color: #e8954f;
+  border-color: #e8954f;
+}
+.btn-login,
+.btn-login.active,
+.open > .dropdown-toggle.btn-login {
+  background-image: none;
+}
+.btn-login.disabled,
+.btn-login[disabled],
+fieldset[disabled] .btn-grey,
+.btn-login.disabled:hover,
+.btn-login[disabled]:hover,
+fieldset[disabled] .btn-grey:hover,
+.btn-login.disabled:focus,
+.btn-login[disabled]:focus,
+fieldset[disabled] .btn-grey:focus,
+.btn-login.disabled.focus,
+.btn-login[disabled].focus,
+fieldset[disabled] .btn-grey.focus,
+.btn-login.disabled:active,
+.btn-login[disabled]:active,
+fieldset[disabled] .btn-grey:active,
+.btn-login.disabled.active,
+.btn-login[disabled].active,
+fieldset[disabled] .btn-grey.active {
+  background-color: #eacfb8;
+  border-color: #e1c9b4;
+}
+.btn-login .badge {
+  color: #e1b38d;
+  background-color: #fff;
+}
+
 .btn-orange {
   color: #474a4d;
   background-color: #ced7df;
@@ -243,11 +309,10 @@ fieldset[disabled] .btn-orange.active {
 }
 
 .btn-lgC{
-  padding: 20px 5px 20px ;
-  margin:10px 0 10px ;
-  font-size: 20px;
-  line-height: 1.3333333;
-  border-radius: 6px;
+  margin:10px 0 20px ;
+  width: 90%;
+  height: 40px;
+  border-radius: 1px;
 }
 
 .centerC {
@@ -255,6 +320,14 @@ fieldset[disabled] .btn-orange.active {
   display: inline-table;
   margin-left: auto;
   margin-right: auto;
+}
+
+.copyRight{
+	bottom:3%;
+	left:2%;
+	color:CDCDC1;
+	position:absolute;
+	z-index:1;
 }
 
 .div-relative{
@@ -280,6 +353,56 @@ fieldset[disabled] .btn-orange.active {
 
 .fontC{
 font-family:arial,verdana,\5fae\8f6f\96c5\9ed1;
+}
+
+
+.form-controlC {
+  display: block;
+  width: 90%;
+  height: 50px;
+  padding: 6px 12px;
+  margin: 15px 10px 15px 10px;; 
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-controlC:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.form-controlC::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.form-controlC:-ms-input-placeholder {
+  color: #999;
+}
+.form-controlC::-webkit-input-placeholder {
+  color: #999;
+}
+.form-controlC[disabled],
+.form-controlC[readonly],
+fieldset[disabled] .form-controlC {
+  background-color: #eee;
+  opacity: 1;
+}
+.form-controlC[disabled],
+fieldset[disabled] .form-controlC {
+  cursor: not-allowed;
+}
+textarea.form-controlC {
+  height: auto;
 }
 
 .icon {
@@ -599,6 +722,20 @@ button.list-group-itemC {
     color: #ccc;
     background-color: #e7e7e7;
   }
+}
+
+.panel-login{
+	 opacity:0.9;
+	 position:absolute;
+	 z-index:10;
+	 width:30%;
+	 height:50%; 
+	 top:20%; 
+	 right:10%;
+}
+
+.panel-font{
+	text-align:center;
 }
 
 .panel-detailinfo {
